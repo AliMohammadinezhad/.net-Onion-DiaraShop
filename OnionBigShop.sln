@@ -7,9 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShopManagement", "ShopManag
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Domain", "SM.Domain", "{CC8CD224-1BFB-4629-A4BF-243A24A0F8E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Domain", "ShopManagement.Domain\ShopManagement.Domain.csproj", "{75327FD8-17C3-4B4D-9714-692652070397}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Domain", "ShopManagement.Domain\ShopManagement.Domain.csproj", "{75327FD8-17C3-4B4D-9714-692652070397}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{59CCE010-A205-4845-B69D-3FF24F9AE724}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Framework.csproj", "{59CCE010-A205-4845-B69D-3FF24F9AE724}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Application", "SM.Application", "{E8E4B4F1-EA91-4326-8701-2E43B8142BF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Contracts", "ShopManagement.Contracts\ShopManagement.Contracts.csproj", "{F4D5E952-D5C1-4142-A7DE-35078E6E46F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,10 @@ Global
 		{59CCE010-A205-4845-B69D-3FF24F9AE724}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59CCE010-A205-4845-B69D-3FF24F9AE724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59CCE010-A205-4845-B69D-3FF24F9AE724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D5E952-D5C1-4142-A7DE-35078E6E46F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D5E952-D5C1-4142-A7DE-35078E6E46F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D5E952-D5C1-4142-A7DE-35078E6E46F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D5E952-D5C1-4142-A7DE-35078E6E46F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CC8CD224-1BFB-4629-A4BF-243A24A0F8E2} = {D9AE81F9-C0BB-4062-97E2-901D42B387BB}
 		{75327FD8-17C3-4B4D-9714-692652070397} = {CC8CD224-1BFB-4629-A4BF-243A24A0F8E2}
+		{E8E4B4F1-EA91-4326-8701-2E43B8142BF7} = {D9AE81F9-C0BB-4062-97E2-901D42B387BB}
+		{F4D5E952-D5C1-4142-A7DE-35078E6E46F0} = {E8E4B4F1-EA91-4326-8701-2E43B8142BF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4348554-1CA7-4F93-A74A-E93BD864DE42}

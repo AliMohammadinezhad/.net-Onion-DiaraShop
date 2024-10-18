@@ -25,7 +25,7 @@ public class ProductCategoryApplication : IProductCategoryApplication
             command.PictureAlt, command.PictureTitle, command.Keyword, command.MetaDescription, slug);
 
         _repository.Create(productCategory);
-        _repository.Save();
+        _repository.SaveChanges();
         return operation.Succeeded();
     }
 
@@ -45,7 +45,7 @@ public class ProductCategoryApplication : IProductCategoryApplication
         productCategory.Edit(command.Name, command.Description,
             command.Picture, command.PictureAlt, command.PictureTitle,
             command.Keyword, command.MetaDescription, slug);
-        _repository.Save();
+        _repository.SaveChanges();
         return operation.Succeeded();
     }
 

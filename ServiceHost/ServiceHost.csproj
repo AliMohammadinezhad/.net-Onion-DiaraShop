@@ -10,4 +10,8 @@
     <ProjectReference Include="..\ShopManagement.infrastructure.Configuration\ShopManagement.infrastructure.Configuration.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Pages\NewFolder\" />
+  </ItemGroup>
+
 </Project>

@@ -268,18 +268,15 @@
 
 </div>
 </div>
-    <div id="MainModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content" id="ModalContent">
-            </div>
+<div id="MainModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content" id="ModalContent">
         </div>
     </div>
+</div>
 
 
-<script>
-var resizefunc = []
-</script> 
-<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/AdminTheme/assets/js/bootstrap.min.js"></script>
 <script src="~/AdminTheme/assets/js/waves.js"></script>
 <script src="~/AdminTheme/assets/js/wow.min.js"></script>
@@ -310,9 +307,13 @@ var resizefunc = []
 <script src="~/assets/counterup/waypoints.min.js" type="text/javascript"></script>
 <script src="~/assets/counterup/jquery.counterup.min.js" type="text/javascript"></script>
 
+
 @await RenderSectionAsync("Scripts", false)
 <!-- CUSTOM JS -->
 <script src="~/AdminTheme/assets/js/jquery.app.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 <script src="~/AdminTheme/assets/js/site.js"></script>
 <!-- Dashboard -->
 <script src="~/AdminTheme/assets/js/jquery.dashboard.js"></script>

@@ -7,11 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShopManagement.Application\ShopManagement.Application.csproj" />
+    <ProjectReference Include="..\ShopManagement.Contracts\ShopManagement.Contracts.csproj" />
     <ProjectReference Include="..\ShopManagement.infrastructure.Configuration\ShopManagement.infrastructure.Configuration.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Administration\Pages\NewFolder\" />
   </ItemGroup>
 
 </Project>

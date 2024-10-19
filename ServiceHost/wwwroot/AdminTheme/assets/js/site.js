@@ -10,10 +10,10 @@ SinglePage.LoadModal = function () {
         null,
         function (htmlPage) {
             $("#ModalContent").html(htmlPage);
-            const container = document.getElementById("ModalContent");
-            const forms = container.getElementsByTagName("form");
-            const newForm = forms[forms.length - 1];
-            $.validator.unobtrusive.parse(newForm);
+            //const container = document.getElementById("ModalContent");
+            //const forms = container.getElementsByTagName("form");
+            //const newForm = forms[forms.length - 1];
+            //$.validator.unobtrusive.parse(newForm);
             showModal();
         }).fail(function (error) {
             alert("خطایی رخ داده، لطفا با مدیر سیستم تماس بگیرید.");
@@ -85,7 +85,7 @@ function CallBackHandler(data, action, form) {
             alert(data.Message);
             break;
         case "Refresh":
-            if (data.isSuccedded) {
+            if (data.isSucceeded) {
                 window.location.reload();
             } else {
                 alert(data.message);
@@ -184,17 +184,17 @@ function handleAjaxCall(method, url, data) {
     }
 }
 
-jQuery.validator.addMethod("maxFileSize",
-    function (value, element, params) {
-        var size = element.files[0].size;
-        var maxSize = 3 * 1024 * 1024;
-        if (size > maxSize)
-            return false;
-        else {
-            return true;
-        }
-    });
-jQuery.validator.unobtrusive.adapters.addBool("maxFileSize");
+//jQuery.validator.addMethod("maxFileSize",
+//    function (value, element, params) {
+//        var size = element.files[0].size;
+//        var maxSize = 3 * 1024 * 1024;
+//        if (size > maxSize)
+//            return false;
+//        else {
+//            return true;
+//        }
+//    });
+//jQuery.validator.unobtrusive.adapters.addBool("maxFileSize");
 
 //jQuery.validator.addMethod("maxFileSize",
 //    function (value, element, params) {

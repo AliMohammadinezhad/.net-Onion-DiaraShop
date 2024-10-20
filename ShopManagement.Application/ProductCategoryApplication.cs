@@ -17,7 +17,7 @@ public class ProductCategoryApplication : IProductCategoryApplication
     {
         var operation = new OperationResult();
         if (_repository.Exists(x => x.Name == command.Name))
-            operation.Failed("امکان ثبت رکورد تکراری وجود ندارد. لطفا مجددا تلاش بفرمایید.");
+            operation.Failed(ApplicationMessages.DuplicatedRecord);
 
         var slug = command.Slug.Slugify();
 
@@ -35,10 +35,10 @@ public class ProductCategoryApplication : IProductCategoryApplication
         var productCategory = _repository.Get(command.Id);
         
         if (productCategory == null)
-            return operation.Failed("رکورد با اطلاعات درخواست شده یافت نشد. لطفا مجددا تلاش بفرمایید.");
+            return operation.Failed(ApplicationMessages.RecordNotFound);
         
         if (_repository.Exists(x => x.Name == command.Name && x.Id != command.Id))
-            return operation.Failed("رکورد با اطلاعات درخواست شده یافت نشد. لطفا مجددا تلاش بفرمایید.");
+            return operation.Failed(ApplicationMessages.RecordNotFound);
 
         var slug = command.Slug.Slugify();
         

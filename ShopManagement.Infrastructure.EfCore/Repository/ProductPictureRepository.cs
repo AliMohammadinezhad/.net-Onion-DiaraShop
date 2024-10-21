@@ -34,7 +34,8 @@ public class ProductPictureRepository : RepositoryBase<long, ProductPicture>, IP
             CreationDate = x.CreationDate.ToString(),
             Id = x.Id,
             Product = x.Product.Name,
-            ProductId = x.ProductId
+            ProductId = x.ProductId,
+            IsRemoved = x.IsRemoved
         });
 
         if (searchModel.ProductId != 0)

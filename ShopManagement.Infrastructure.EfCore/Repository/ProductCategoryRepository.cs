@@ -4,7 +4,7 @@ using ShopManagement.Domain.ProductCategoryAgg;
 
 namespace ShopManagement.Infrastructure.EfCore.Repository;
 
-public class ProductCategoryRepository : RepositoryBase<long, ProductCategory>,IProductCategoryRepository
+public class ProductCategoryRepository : RepositoryBase<long, ProductCategory>, IProductCategoryRepository
 {
     private readonly ApplicationDbContext _context;
 
@@ -13,6 +13,15 @@ public class ProductCategoryRepository : RepositoryBase<long, ProductCategory>,I
         _context = context;
     }
 
+
+    public List<ProductCategoryViewModel> GetProductCategories()
+    {
+        return _context.ProductCategories.Select(x => new ProductCategoryViewModel
+        {
+            Id = x.Id,
+            Name = x.Name,
+        }).ToList();
+    }
 
     public EditProductCategory GetDetails(long id)
     {
@@ -45,4 +54,4 @@ public class ProductCategoryRepository : RepositoryBase<long, ProductCategory>,I
 
         return query.OrderByDescending(x => x.Id).ToList();
     }
- }
+}

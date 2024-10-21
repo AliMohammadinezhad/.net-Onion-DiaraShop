@@ -49,6 +49,11 @@ public class ProductCategoryApplication : IProductCategoryApplication
         return operation.Succeeded();
     }
 
+    public List<ProductCategoryViewModel> GetProductCategories()
+    {
+        return _repository.GetProductCategories();
+    }
+
     public List<ProductCategoryViewModel> Search(ProductCategorySearchModel command)
     {
         return _repository.Search(command);

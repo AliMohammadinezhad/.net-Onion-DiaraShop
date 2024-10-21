@@ -44,7 +44,9 @@ public class ProductRepository : RepositoryBase<long, Product>, IProductReposito
             Category = x.Category.Name,
             CategoryId = x.CategoryId,
             Picture = x.Picture,
-            UnitPrice = x.UnitPrice
+            UnitPrice = x.UnitPrice,
+            CreationDate = x.CreationDate.ToString(),
+            IsInStock = x.IsInStock
         });
         if (!string.IsNullOrWhiteSpace(searchModel.Name))
             query = query.Where(x => x.Name.Contains(searchModel.Name));

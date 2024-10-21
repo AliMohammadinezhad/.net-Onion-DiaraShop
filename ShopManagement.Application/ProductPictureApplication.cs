@@ -28,13 +28,13 @@ public class ProductPictureApplication : IProductPictureApplication
     public OperationResult Edit(EditProductPicture command)
     {
         var operation = new OperationResult();
-        var productPicture = _repository.Get(command.ProductId);
+        var productPicture = _repository.Get(command.Id);
         
         if (productPicture == null)
             operation.Failed(ApplicationMessages.RecordNotFound);
         
         if(_repository.Exists(x => x.Picture == command.Picture &&
-                                                x.ProductId != command.ProductId &&
+                                                x.ProductId == command.ProductId &&
                                                 x.Id != command.Id))
             operation.Failed(ApplicationMessages.DuplicatedRecord);
 

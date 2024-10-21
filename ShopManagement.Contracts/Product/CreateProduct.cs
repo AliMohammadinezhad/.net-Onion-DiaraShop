@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Framework.Application;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Contracts.ProductCategory;
 
 namespace ShopManagement.Contracts.Product;

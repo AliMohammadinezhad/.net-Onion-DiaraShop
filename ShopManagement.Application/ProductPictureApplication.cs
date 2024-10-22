@@ -19,7 +19,8 @@ public class ProductPictureApplication : IProductPictureApplication
         var operation = new OperationResult();
         if (_repository.Exists(x => x.Picture == command.Picture && x.ProductId != command.ProductId))
             return operation.Failed(ApplicationMessages.DuplicatedRecord);
-        var productPicture = new ProductPicture(command.ProductId, command.Picture, command.PictureAlt, command.PictureTitle);
+        var productPicture =
+            new ProductPicture(command.ProductId, command.Picture, command.PictureAlt, command.PictureTitle);
         _repository.Create(productPicture);
         _repository.SaveChanges();
         return operation.Succeeded();
@@ -29,13 +30,13 @@ public class ProductPictureApplication : IProductPictureApplication
     {
         var operation = new OperationResult();
         var productPicture = _repository.Get(command.Id);
-        
+
         if (productPicture == null)
             operation.Failed(ApplicationMessages.RecordNotFound);
-        
-        if(_repository.Exists(x => x.Picture == command.Picture &&
-                                                x.ProductId == command.ProductId &&
-                                                x.Id != command.Id))
+
+        if (_repository.Exists(x => x.Picture == command.Picture &&
+                                    x.ProductId == command.ProductId &&
+                                    x.Id != command.Id))
             operation.Failed(ApplicationMessages.DuplicatedRecord);
 
         productPicture.Edit(
@@ -43,7 +44,7 @@ public class ProductPictureApplication : IProductPictureApplication
             command.Picture,
             command.PictureAlt,
             command.PictureTitle);
-        
+
         _repository.SaveChanges();
         return operation.Succeeded();
     }
@@ -59,7 +60,6 @@ public class ProductPictureApplication : IProductPictureApplication
         productPicture.Remove();
         _repository.SaveChanges();
         return operation.Succeeded();
-
     }
 
     public OperationResult Restore(long id)

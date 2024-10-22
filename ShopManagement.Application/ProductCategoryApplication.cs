@@ -33,15 +33,15 @@ public class ProductCategoryApplication : IProductCategoryApplication
     {
         var operation = new OperationResult();
         var productCategory = _repository.Get(command.Id);
-        
+
         if (productCategory == null)
             return operation.Failed(ApplicationMessages.RecordNotFound);
-        
+
         if (_repository.Exists(x => x.Name == command.Name && x.Id != command.Id))
             return operation.Failed(ApplicationMessages.RecordNotFound);
 
         var slug = command.Slug.Slugify();
-        
+
         productCategory.Edit(command.Name, command.Description,
             command.Picture, command.PictureAlt, command.PictureTitle,
             command.Keyword, command.MetaDescription, slug);

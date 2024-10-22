@@ -45,7 +45,7 @@ public class ProductApplication : IProductApplication
             command.Description, command.Picture, command.PictureAlt, command.PictureTitle, slug,
             command.Keyword,
             command.MetaDescription, command.CategoryId);
-        
+
         _repository.SaveChanges();
         return operation.Succeeded();
     }

@@ -4,9 +4,11 @@ using ShopManagement.Application;
 using ShopManagement.Contracts.Product;
 using ShopManagement.Contracts.ProductCategory;
 using ShopManagement.Contracts.ProductPicture;
+using ShopManagement.Contracts.Slide;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
+using ShopManagement.Domain.SlideAgg;
 using ShopManagement.Infrastructure.EfCore;
 using ShopManagement.Infrastructure.EfCore.Repository;
 
@@ -24,6 +26,9 @@ public class ShopManagementDependencyInjection
 
         services.AddTransient<IProductPictureApplication, ProductPictureApplication>();
         services.AddTransient<IProductPictureRepository, ProductPictureRepository>();
+
+        services.AddTransient<ISlideApplication, SlideApplication>();
+        services.AddTransient<ISlideRepository, SlideRepository>();
 
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 

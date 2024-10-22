@@ -13,17 +13,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Fram
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Application", "SM.Application", "{E8E4B4F1-EA91-4326-8701-2E43B8142BF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Contracts", "ShopManagement.Contracts\ShopManagement.Contracts.csproj", "{F4D5E952-D5C1-4142-A7DE-35078E6E46F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Contracts", "ShopManagement.Contracts\ShopManagement.Contracts.csproj", "{F4D5E952-D5C1-4142-A7DE-35078E6E46F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Application", "ShopManagement.Application\ShopManagement.Application.csproj", "{D93AB050-5CE5-49A5-B9AC-63BD87B2D167}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Application", "ShopManagement.Application\ShopManagement.Application.csproj", "{D93AB050-5CE5-49A5-B9AC-63BD87B2D167}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Infrastructure", "SM.Infrastructure", "{78267DB9-AB25-4C80-B676-2F8D6CFE44A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Infrastructure.EfCore", "ShopManagement.Infrastructure.EfCore\ShopManagement.Infrastructure.EfCore.csproj", "{668FBCA2-3E51-47F5-B305-5A9CC69A5949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Infrastructure.EfCore", "ShopManagement.Infrastructure.EfCore\ShopManagement.Infrastructure.EfCore.csproj", "{668FBCA2-3E51-47F5-B305-5A9CC69A5949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.infrastructure.Configuration", "ShopManagement.infrastructure.Configuration\ShopManagement.infrastructure.Configuration.csproj", "{8896C8B0-34CB-451A-B027-EE8B04C24EAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.infrastructure.Configuration", "ShopManagement.infrastructure.Configuration\ShopManagement.infrastructure.Configuration.csproj", "{8896C8B0-34CB-451A-B027-EE8B04C24EAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHost", "ServiceHost\ServiceHost.csproj", "{BB89018A-3EC7-443D-ACD0-9E13689E45AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHost", "ServiceHost\ServiceHost.csproj", "{BB89018A-3EC7-443D-ACD0-9E13689E45AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

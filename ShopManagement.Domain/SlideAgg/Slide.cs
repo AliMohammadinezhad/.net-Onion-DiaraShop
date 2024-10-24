@@ -12,10 +12,12 @@ public class Slide : EntityBase
     public string Text { get; private set; }
     public string BtnText { get; private set; }
     public bool IsRemoved { get; private set; }
+    public string Link { get; private set; }
 
-    public Slide(string picture, string pictureAlt, string pictureTitle, string heading, string title, string text,
+    public Slide(string picture, string link, string pictureAlt, string pictureTitle, string heading, string title, string text,
         string btnText)
     {
+        Link = link;
         Picture = picture;
         PictureAlt = pictureAlt;
         PictureTitle = pictureTitle;
@@ -27,8 +29,9 @@ public class Slide : EntityBase
     }
 
     public void Edit(string picture, string pictureAlt, string pictureTitle, string heading, string title, string text,
-        string btnText)
+        string btnText, string link)
     {
+        Link = link;
         Picture = picture;
         PictureAlt = pictureAlt;
         PictureTitle = pictureTitle;

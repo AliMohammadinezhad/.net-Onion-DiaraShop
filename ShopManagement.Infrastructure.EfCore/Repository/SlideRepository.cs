@@ -24,7 +24,8 @@ public class SlideRepository : RepositoryBase<long, Slide>, ISlideRepository
             PictureAlt = x.PictureAlt,
             PictureTitle = x.PictureTitle,
             Text = x.Text,
-            Title = x.Title
+            Title = x.Title,
+            Link = x.Link
         }).FirstOrDefault(x => x.Id == id);
     }
 

@@ -45,6 +45,7 @@ public class CustomerDiscountRepository : RepositoryBase<long, CustomerDiscount>
             StartDateGr = x.StartDate,
             ProductId = x.ProductId,
             Reason = x.Reason,
+            CreationDate = x.CreationDate.ToFarsi()
         });
 
         if (searchModel.ProductId > 0)

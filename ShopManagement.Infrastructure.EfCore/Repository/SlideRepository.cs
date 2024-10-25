@@ -1,4 +1,5 @@
-﻿using Framework.Infrastructure;
+﻿using Framework.Application;
+using Framework.Infrastructure;
 using ShopManagement.Contracts.Slide;
 using ShopManagement.Domain.SlideAgg;
 
@@ -38,7 +39,7 @@ public class SlideRepository : RepositoryBase<long, Slide>, ISlideRepository
             Picture = x.Picture,
             Id = x.Id,
             IsRemoved = x.IsRemoved,
-            CreationDate = x.CreationDate.ToString(),
+            CreationDate = x.CreationDate.ToFarsi(),
         }).OrderByDescending(x => x.Id).ToList();
     }
 }

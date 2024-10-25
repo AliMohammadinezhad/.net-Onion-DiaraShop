@@ -1,4 +1,5 @@
-﻿using Framework.Infrastructure;
+﻿using Framework.Application;
+using Framework.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Contracts.Product;
 using ShopManagement.Domain.ProductAgg;
@@ -54,7 +55,7 @@ public class ProductRepository : RepositoryBase<long, Product>, IProductReposito
             CategoryId = x.CategoryId,
             Picture = x.Picture,
             UnitPrice = x.UnitPrice,
-            CreationDate = x.CreationDate.ToString(),
+            CreationDate = x.CreationDate.ToFarsi(),
             IsInStock = x.IsInStock
         });
         if (!string.IsNullOrWhiteSpace(searchModel.Name))

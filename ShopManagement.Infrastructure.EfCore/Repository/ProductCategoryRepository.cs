@@ -1,4 +1,5 @@
-﻿using Framework.Infrastructure;
+﻿using Framework.Application;
+using Framework.Infrastructure;
 using ShopManagement.Contracts.ProductCategory;
 using ShopManagement.Domain.ProductCategoryAgg;
 
@@ -44,7 +45,7 @@ public class ProductCategoryRepository : RepositoryBase<long, ProductCategory>, 
         var query = _context.ProductCategories.Select(x => new ProductCategoryViewModel
         {
             Id = x.Id,
-            CreationDate = x.CreationDate.ToString(),
+            CreationDate = x.CreationDate.ToFarsi(),
             Name = x.Name,
             Picture = x.Picture
         });

@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using Framework.Application;
 using Framework.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Contracts.ProductPicture;
@@ -31,7 +32,7 @@ public class ProductPictureRepository : RepositoryBase<long, ProductPicture>, IP
         var query = _context.ProductPictures.Include(x => x.Product).Select(x => new ProductPictureViewModel
         {
             Picture = x.Picture,
-            CreationDate = x.CreationDate.ToString(),
+            CreationDate = x.CreationDate.ToFarsi(),
             Id = x.Id,
             Product = x.Product.Name,
             ProductId = x.ProductId,

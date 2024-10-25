@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DiscountManagement.infrastructure.Configuration\DiscountManagement.infrastructure.Configuration.csproj" />
     <ProjectReference Include="..\ShopManagement.Application\ShopManagement.Application.csproj" />
     <ProjectReference Include="..\ShopManagement.Contracts\ShopManagement.Contracts.csproj" />
     <ProjectReference Include="..\ShopManagement.infrastructure.Configuration\ShopManagement.infrastructure.Configuration.csproj" />

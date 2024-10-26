@@ -1,4 +1,5 @@
-﻿using DiscountManagement.Domain.CustomerDiscountAgg;
+﻿using DiscountManagement.Domain.ColleagueDiscountAgg;
+using DiscountManagement.Domain.CustomerDiscountAgg;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiscountManagement.Infrastructure.EfCore;
@@ -10,6 +11,7 @@ public class DiscountContext : DbContext
     }
 
     public DbSet<CustomerDiscount> CustomerDiscounts { get; set; }
+    public DbSet<ColleagueDiscount> ColleagueDiscounts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -68,7 +68,7 @@
                                 <th>تاریخ پایان</th>
                                 <th>علت تخفیف</th>
                                 <th>تاریخ تولید</th>
-                                @* <th>عملیات</th> *@
+                                <th>عملیات</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -84,6 +84,12 @@
                                     <td>@item.EndDate</td>
                                     <td>@item.Reason</td>
                                     <td>@item.CreationDate</td>
+                                    <td>
+                                        <a class="btn btn-warning m-b-5 "
+                                           href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
+                                            <i class="fa fa-edit"></i> ویرایش
+                                        </a>
+                                    </td>
                                 </tr>
                             }
                             </tbody>

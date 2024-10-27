@@ -36,7 +36,8 @@ public class ColleagueDiscountRepository : RepositoryBase<long, ColleagueDiscoun
             DiscountRate = x.DiscountRate.ToString(),
             CreationDate = x.CreationDate.ToFarsi(),
             ProductId = x.ProductId,
-            Id = x.Id
+            Id = x.Id,
+            IsRemoved = x.IsRemoved
 
         });
 

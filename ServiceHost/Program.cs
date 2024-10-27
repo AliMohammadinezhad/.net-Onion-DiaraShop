@@ -1,4 +1,5 @@
 using DiscountManagement.infrastructure.Configuration;
+using InventoryManagement.Infrastructure.Configuration;
 using ShopManagement.infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ var connectionString = builder.Configuration.GetConnectionString("BigShopDb");
 
 ShopManagementDependencyInjection.Configuration(builder.Services, connectionString);
 DiscountManagementDependencyInjection.Configuration(builder.Services, connectionString);
+InventoryDependencyInjection.Configure(builder.Services, connectionString);
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

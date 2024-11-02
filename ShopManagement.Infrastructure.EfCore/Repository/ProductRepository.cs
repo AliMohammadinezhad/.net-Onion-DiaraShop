@@ -30,8 +30,7 @@ public class ProductRepository : RepositoryBase<long, Product>, IProductReposito
             Slug = x.Slug,
             Keyword = x.Keyword,
             MetaDescription = x.MetaDescription,
-            ShortDescription = x.ShortDescription,
-            UnitPrice = x.UnitPrice
+            ShortDescription = x.ShortDescription
         }).FirstOrDefault(x => x.Id == id);
     }
 
@@ -54,9 +53,7 @@ public class ProductRepository : RepositoryBase<long, Product>, IProductReposito
             Category = x.Category.Name,
             CategoryId = x.CategoryId,
             Picture = x.Picture,
-            UnitPrice = x.UnitPrice,
             CreationDate = x.CreationDate.ToFarsi(),
-            IsInStock = x.IsInStock
         });
         if (!string.IsNullOrWhiteSpace(searchModel.Name))
             query = query.Where(x => x.Name.Contains(searchModel.Name));

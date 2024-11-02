@@ -21,7 +21,7 @@ public class ProductApplication : IProductApplication
             return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
         var slug = command.Slug.Slugify();
-        var product = new Product(command.Name, command.Code, command.UnitPrice, command.ShortDescription,
+        var product = new Product(command.Name, command.Code,  command.ShortDescription,
             command.Description, command.Picture, command.PictureAlt, command.PictureTitle, slug, command.Keyword,
             command.MetaDescription, command.CategoryId);
         _repository.Create(product);
@@ -41,7 +41,7 @@ public class ProductApplication : IProductApplication
             return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
         var slug = command.Slug.Slugify();
-        product.Edit(command.Name, command.Code, command.UnitPrice, command.ShortDescription,
+        product.Edit(command.Name, command.Code,  command.ShortDescription,
             command.Description, command.Picture, command.PictureAlt, command.PictureTitle, slug,
             command.Keyword,
             command.MetaDescription, command.CategoryId);
@@ -50,29 +50,6 @@ public class ProductApplication : IProductApplication
         return operation.Succeeded();
     }
 
-    public OperationResult InStock(long id)
-    {
-        var operation = new OperationResult();
-        var product = _repository.Get(id);
-        if (product == null)
-            return operation.Failed(ApplicationMessages.RecordNotFound);
-
-        product.InStock();
-        _repository.SaveChanges();
-        return operation.Succeeded();
-    }
-
-    public OperationResult NotInStock(long id)
-    {
-        var operation = new OperationResult();
-        var product = _repository.Get(id);
-        if (product == null)
-            return operation.Failed(ApplicationMessages.RecordNotFound);
-
-        product.NotInStock();
-        _repository.SaveChanges();
-        return operation.Succeeded();
-    }
 
     public EditProduct GetDetails(long id)
     {

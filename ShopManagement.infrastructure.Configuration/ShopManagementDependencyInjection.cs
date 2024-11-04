@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Query.Contracts.Product;
 using Query.Contracts.ProductCategory;
 using Query.Contracts.Slide;
 using Query.Query;
@@ -35,6 +36,7 @@ public class ShopManagementDependencyInjection
 
         services.AddTransient<ISlideQuery, SlideQuery>();
         services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
+        services.AddTransient<IProductQuery, ProductQuery>();
 
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 

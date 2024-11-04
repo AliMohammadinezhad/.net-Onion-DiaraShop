@@ -2352,18 +2352,19 @@ select {
     }
 
 .single-grid-product__price .main-price {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 22px;
     color: #333;
 }
 
     .single-grid-product__price .main-price.discounted {
+        font-size: 12px;
         text-decoration: line-through;
     }
 
 .single-grid-product__price .discounted-price {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 22px;
     margin-right: 10px;

@@ -28,11 +28,11 @@ public class ProductCategoryQuery : IProductCategoryQuery
     {
         var inventory = _inventoryContext.Inventory
             .Select(x => new { x.ProductId, x.UnitPrice })
-            .ToList();
+            .AsNoTracking().ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate })
-            .ToList();
+            .AsNoTracking().ToList();
         var category = _context.ProductCategories
             .Include(x => x.Products)
             .ThenInclude(x => x.Category)
@@ -46,7 +46,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
                 Slug = x.Slug,
                 MetaDescription = x.MetaDescription,
 
-            }).FirstOrDefault(x => x.Slug == slug);
+            }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
         foreach (var product in category.Products)
         {
@@ -84,18 +84,18 @@ public class ProductCategoryQuery : IProductCategoryQuery
             Id = x.Id,
             Slug = x.Slug,
             PictureTitle = x.PictureTitle
-        }).ToList();
+        }).AsNoTracking().ToList();
     }
 
     public List<ProductCategoryQueryModel> GetProductCategoriesWithProducts()
     {
         var inventory = _inventoryContext.Inventory
             .Select(x => new { x.ProductId, x.UnitPrice })
-            .ToList();
+            .AsNoTracking().ToList();
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId })
-            .ToList();
+            .AsNoTracking().ToList();
         var categories = _context.ProductCategories
             .Include(x => x.Products)
             .ThenInclude(x => x.Category)
@@ -104,7 +104,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
                 Id = x.Id,
                 Name = x.Name,
                 Products = MapProducts(x.Products)
-            }).ToList();
+            }).AsNoTracking().ToList();
 
         foreach (var product in categories.SelectMany(category => category.Products))
         {

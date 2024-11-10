@@ -24,7 +24,6 @@ public class ProductRepository : RepositoryBase<long, Product>, IProductReposito
             Code = x.Code,
             CategoryId = x.CategoryId,
             Description = x.Description,
-            Picture = x.Picture,
             PictureAlt = x.PictureAlt,
             PictureTitle = x.PictureTitle,
             Slug = x.Slug,
@@ -32,6 +31,11 @@ public class ProductRepository : RepositoryBase<long, Product>, IProductReposito
             MetaDescription = x.MetaDescription,
             ShortDescription = x.ShortDescription
         }).FirstOrDefault(x => x.Id == id);
+    }
+
+    public Product GetProductWithCategoryById(long id)
+    {
+        return _context.Products.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
     }
 
     public List<ProductViewModel> GetProducts()
@@ -52,7 +56,7 @@ public class ProductRepository : RepositoryBase<long, Product>, IProductReposito
             Code = x.Code,
             Category = x.Category.Name,
             CategoryId = x.CategoryId,
-            Picture = x.Picture,
+            //Picture = x.Picture,
             CreationDate = x.CreationDate.ToFarsi(),
         });
         if (!string.IsNullOrWhiteSpace(searchModel.Name))

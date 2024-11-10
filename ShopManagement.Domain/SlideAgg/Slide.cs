@@ -32,7 +32,8 @@ public class Slide : EntityBase
         string btnText, string link)
     {
         Link = link;
-        Picture = picture;
+        if (!string.IsNullOrWhiteSpace(picture))
+            Picture = picture;
         PictureAlt = pictureAlt;
         PictureTitle = pictureTitle;
         Heading = heading;

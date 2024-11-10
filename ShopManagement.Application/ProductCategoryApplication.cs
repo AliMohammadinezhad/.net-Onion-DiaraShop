@@ -6,11 +6,13 @@ namespace ShopManagement.Application;
 
 public class ProductCategoryApplication : IProductCategoryApplication
 {
+    private readonly IFileUploader _fileUploader;
     private readonly IProductCategoryRepository _repository;
 
-    public ProductCategoryApplication(IProductCategoryRepository repository)
+    public ProductCategoryApplication(IProductCategoryRepository repository, IFileUploader fileUploader)
     {
         _repository = repository;
+        _fileUploader = fileUploader;
     }
 
     public OperationResult Create(CreateProductCategory command)
@@ -20,12 +22,14 @@ public class ProductCategoryApplication : IProductCategoryApplication
             operation.Failed(ApplicationMessages.DuplicatedRecord);
 
         var slug = command.Slug.Slugify();
+        var picturePath = command.Slug;
+        var pictureName = _fileUploader.Upload(command.Picture, picturePath);
 
-        var productCategory = new ProductCategory(command.Name, command.Description, command.Picture,
+        var productCategory = new ProductCategory(command.Name, command.Description, pictureName,
             command.PictureAlt, command.PictureTitle, command.Keyword, command.MetaDescription, slug);
 
         _repository.Create(productCategory);
-        _repository.SaveChanges();
+        _repository.SaveChanges(); 
         return operation.Succeeded();
     }
 
@@ -41,9 +45,11 @@ public class ProductCategoryApplication : IProductCategoryApplication
             return operation.Failed(ApplicationMessages.RecordNotFound);
 
         var slug = command.Slug.Slugify();
+        var picturePath = command.Slug;
+        var fileName = _fileUploader.Upload(command.Picture, picturePath);
 
         productCategory.Edit(command.Name, command.Description,
-            command.Picture, command.PictureAlt, command.PictureTitle,
+            fileName, command.PictureAlt, command.PictureTitle,
             command.Keyword, command.MetaDescription, slug);
         _repository.SaveChanges();
         return operation.Succeeded();

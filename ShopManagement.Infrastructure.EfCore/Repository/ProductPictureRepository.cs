@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Framework.Application;
+﻿using Framework.Application;
 using Framework.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using ShopManagement.Contracts.ProductPicture;
@@ -10,6 +9,7 @@ namespace ShopManagement.Infrastructure.EfCore.Repository;
 public class ProductPictureRepository : RepositoryBase<long, ProductPicture>, IProductPictureRepository
 {
     private readonly ApplicationDbContext _context;
+
     public ProductPictureRepository(ApplicationDbContext context) : base(context)
     {
         _context = context;
@@ -20,18 +20,25 @@ public class ProductPictureRepository : RepositoryBase<long, ProductPicture>, IP
         return _context.ProductPictures.Select(x => new EditProductPicture
         {
             Id = x.Id,
-            Picture = x.Picture,
             PictureAlt = x.PictureAlt,
             PictureTitle = x.PictureTitle,
             ProductId = x.ProductId
         }).FirstOrDefault(x => x.Id == id);
     }
 
+    public ProductPicture GetWithProductAndCategoryById(long id)
+    {
+        return _context.ProductPictures
+            .Include(x => x.Product)
+            .ThenInclude(x => x.Category)
+            .FirstOrDefault(x => x.Id == id);
+    }
+
     public List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel)
     {
         var query = _context.ProductPictures.Include(x => x.Product).Select(x => new ProductPictureViewModel
         {
-            Picture = x.Picture,
+            //Picture = x.Picture,
             CreationDate = x.CreationDate.ToFarsi(),
             Id = x.Id,
             Product = x.Product.Name,

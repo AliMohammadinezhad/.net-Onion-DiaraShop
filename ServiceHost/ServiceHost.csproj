@@ -43,6 +43,8 @@
 
   <ItemGroup>
     <Folder Include="Pages\Shared\Components\Menu\" />
+    <Folder Include="wwwroot\ProductPictures\آباژور\" />
+    <Folder Include="wwwroot\ProductPictures\لوستر-8-پر\" />
   </ItemGroup>
 
 </Project>

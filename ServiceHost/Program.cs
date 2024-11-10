@@ -1,5 +1,7 @@
 using DiscountManagement.infrastructure.Configuration;
+using Framework.Application;
 using InventoryManagement.Infrastructure.Configuration;
+using ServiceHost;
 using ShopManagement.infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,7 @@ ShopManagementDependencyInjection.Configuration(builder.Services, connectionStri
 DiscountManagementDependencyInjection.Configuration(builder.Services, connectionString);
 InventoryDependencyInjection.Configure(builder.Services, connectionString);
 
+builder.Services.AddTransient<IFileUploader, FileUploader>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

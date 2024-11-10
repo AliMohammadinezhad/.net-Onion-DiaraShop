@@ -7,20 +7,20 @@ namespace ShopManagement.Application;
 public class SlideApplication : ISlideApplication
 {
     private readonly ISlideRepository _repository;
-
-    public SlideApplication(ISlideRepository repository)
+    private readonly IFileUploader _fileUploader;
+    public SlideApplication(ISlideRepository repository, IFileUploader fileUploader)
     {
         _repository = repository;
+        _fileUploader = fileUploader;
     }
 
     public OperationResult Create(CreateSlide command)
     {
         var operation = new OperationResult();
-        var slide = new Slide(command.Picture,command.Link,command.PictureAlt,command.PictureTitle, command.Heading,
+        var slidePath = _fileUploader.Upload(command.Picture, "slides");
+        var slide = new Slide(slidePath,command.Link,command.PictureAlt,command.PictureTitle, command.Heading,
             command.Title, command.Text, command.BtnText);
-        if (_repository.Exists(x => x.Picture == command.Picture))
-            return operation.Failed(ApplicationMessages.DuplicatedRecord);
-
+        
         _repository.Create(slide);
         _repository.SaveChanges();
         return operation.Succeeded();
@@ -32,8 +32,8 @@ public class SlideApplication : ISlideApplication
         var slide = _repository.Get(command.Id);
         if (slide == null)
             return operation.Failed(ApplicationMessages.RecordNotFound);
-
-        slide.Edit(command.Picture, command.PictureAlt, command.Title, command.Heading, command.Title, command.Text, command.BtnText, command.Link);
+        var slidePath = _fileUploader.Upload(command.Picture, "slides");
+        slide.Edit(slidePath, command.PictureAlt, command.Title, command.Heading, command.Title, command.Text, command.BtnText, command.Link);
         _repository.SaveChanges();
         return operation.Succeeded();
     }

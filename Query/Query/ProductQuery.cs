@@ -3,6 +3,7 @@ using Framework.Application;
 using InventoryManagement.Infrastructure.EfCore;
 using Microsoft.EntityFrameworkCore;
 using Query.Contracts.Product;
+using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EfCore;
 
 namespace Query.Query;
@@ -25,6 +26,7 @@ public class ProductQuery : IProductQuery
     {
         var product = _context.Products
             .Include(x => x.Category)
+            .Include(x => x.ProductPictures)
             .Select(product => new ProductQueryModel()
             {
                 Id = product.Id,
@@ -40,6 +42,7 @@ public class ProductQuery : IProductQuery
                 Keyword = product.Keyword,
                 MetaDescription = product.MetaDescription,
                 ShortDescription = product.ShortDescription,
+                Pictures = MapProductPictures(product.ProductPictures)
             }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
         var inventory = _inventoryContext.Inventory
@@ -72,6 +75,20 @@ public class ProductQuery : IProductQuery
             product.PriceWithDiscount = (price - discountAmount).ToMoney();
 
             return product;
+    }
+
+    private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)
+    {
+        return pictures.Select(x => new ProductPictureQueryModel
+            {
+                IsRemoved = x.IsRemoved,
+                Picture = x.Picture,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle,
+                ProductId = x.ProductId
+            })
+            .Where(x => !x.IsRemoved)
+            .ToList();
     }
 
     public List<ProductQueryModel> GetLatestArrivals()

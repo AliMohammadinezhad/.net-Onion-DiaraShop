@@ -38,7 +38,7 @@ public class ProductPictureRepository : RepositoryBase<long, ProductPicture>, IP
     {
         var query = _context.ProductPictures.Include(x => x.Product).Select(x => new ProductPictureViewModel
         {
-            //Picture = x.Picture,
+            Picture = x.Picture,
             CreationDate = x.CreationDate.ToFarsi(),
             Id = x.Id,
             Product = x.Product.Name,

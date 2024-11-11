@@ -19,7 +19,7 @@ public class FileUploader : IFileUploader
         if (!Directory.Exists(directoryPath))
             Directory.CreateDirectory(directoryPath);
 
-        var fileName = $"{DateTime.Now.ToFileName()}-{file.Name}";
+        var fileName = $"{DateTime.Now.ToFileName()}-{file.FileName}";
         var filePath = $"{directoryPath}/{fileName}";
 
         using var output = File.Create(filePath);

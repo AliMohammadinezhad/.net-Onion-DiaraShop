@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Query.Contracts.ProductCategory;
 
@@ -14,9 +13,9 @@ namespace ServiceHost.Pages
             _productCategoryQuery = productCategoryQuery;
         }
 
-        public void OnGet(string slug)
+        public void OnGet(string categorySlug)
         {
-            ProductCategory = _productCategoryQuery.GetProductCategoryWithProducts(slug);
+            ProductCategory = _productCategoryQuery.GetProductCategoryWithProducts(categorySlug);
         }
     }
 }

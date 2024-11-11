@@ -16,4 +16,9 @@ public class ProductQueryModel
     public string DiscountExpireDate { get; set; }
     public string ShortDescription { get; set; }
     public string CategorySlug { get; set; }
+    public string Code { get; set; }
+    public string Description { get; set; }
+    public string Keyword { get; set; }
+    public string MetaDescription { get; set; }
+    public bool IsInStock { get; set; }
 }

@@ -47,14 +47,14 @@
                                                 <span class="new">جدید</span>
                                             }
                                         </div>
-                                        <a href="single-product.html">
+                                        <a asp-page="/Product" asp-route-productSlug="@product.Slug">
                                             <img src="~/ProductPictures/@product.Picture" class="img-fluid" alt="@product.PictureAlt" title="@product.PictureTitle">
                                         </a>
                                     </div>
                                     <div class="single-grid-product__content">
                                         <div class="single-grid-product__category-rating">
                                             <span class="category">
-                                                <a href="shop-left-sidebar.html">@product.Category</a>
+                                                <a asp-page="/ProductCategory" asp-route-categorySlug="@product.CategorySlug">@product.Category</a>
                                             </span>
                                             <span class="rating">
                                                 <i class="ion-android-star active"></i>
@@ -66,7 +66,7 @@
                                         </div>
 
                                         <h3 class="single-grid-product__title">
-                                            <a href="single-product.html">
+                                            <a asp-page="/Product" asp-route-productSlug="@product.Slug">
                                                 @product.Name
                                             </a>
                                         </h3>

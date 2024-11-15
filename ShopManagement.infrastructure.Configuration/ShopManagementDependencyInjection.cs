@@ -5,10 +5,12 @@ using Query.Contracts.ProductCategory;
 using Query.Contracts.Slide;
 using Query.Query;
 using ShopManagement.Application;
+using ShopManagement.Contracts.Comment;
 using ShopManagement.Contracts.Product;
 using ShopManagement.Contracts.ProductCategory;
 using ShopManagement.Contracts.ProductPicture;
 using ShopManagement.Contracts.Slide;
+using ShopManagement.Domain.CommentAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
@@ -33,6 +35,9 @@ public class ShopManagementDependencyInjection
 
         services.AddTransient<ISlideApplication, SlideApplication>();
         services.AddTransient<ISlideRepository, SlideRepository>();
+
+        services.AddTransient<ICommentRepository, CommentRepository>();
+        services.AddTransient<ICommentApplication, CommentApplication>();
 
         services.AddTransient<ISlideQuery, SlideQuery>();
         services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();

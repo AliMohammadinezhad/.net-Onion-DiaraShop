@@ -3,6 +3,7 @@ using Framework.Application;
 using InventoryManagement.Infrastructure.EfCore;
 using Microsoft.EntityFrameworkCore;
 using Query.Contracts.Product;
+using ShopManagement.Domain.CommentAgg;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EfCore;
 
@@ -27,6 +28,7 @@ public class ProductQuery : IProductQuery
         var product = _context.Products
             .Include(x => x.Category)
             .Include(x => x.ProductPictures)
+            .Include(x => x.Comments)
             .Select(product => new ProductQueryModel()
             {
                 Id = product.Id,
@@ -42,7 +44,8 @@ public class ProductQuery : IProductQuery
                 Keyword = product.Keyword,
                 MetaDescription = product.MetaDescription,
                 ShortDescription = product.ShortDescription,
-                Pictures = MapProductPictures(product.ProductPictures)
+                Pictures = MapProductPictures(product.ProductPictures),
+                Comments = MapComments(product.Comments)
             }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
 
         var inventory = _inventoryContext.Inventory
@@ -75,6 +78,17 @@ public class ProductQuery : IProductQuery
             product.PriceWithDiscount = (price - discountAmount).ToMoney();
 
             return product;
+    }
+
+    private static List<CommentQueryModel> MapComments(List<Comment> comments)
+    {
+        return comments.Where(x => x is { IsConfirmed: true, IsCancelled: false })
+            .Select(x => new CommentQueryModel
+        {
+            Id = x.Id,
+            Message = x.Message,
+            Name = x.Name
+        }).OrderByDescending(x=>x.Id).ToList();
     }
 
     private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)

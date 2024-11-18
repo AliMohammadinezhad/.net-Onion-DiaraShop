@@ -6,7 +6,7 @@ namespace Framework.Application;
 
 public static class GenerateSlug
     {
-        public static string Slugify(this string phrase)
+        public static string Slugify(this string? phrase)
         {
             var s = phrase.RemoveDiacritics().ToLower();
             s = Regex.Replace(s, @"[^\u0600-\u06FF\uFB8A\u067E\u0686\u06AF\u200C\u200Fa-z0-9\s-]",
@@ -18,7 +18,7 @@ public static class GenerateSlug
             return s.ToLower();
         }
 
-        public static string RemoveDiacritics(this string text)
+        public static string RemoveDiacritics(this string? text)
         {
             if (string.IsNullOrWhiteSpace(text))
                 return string.Empty;

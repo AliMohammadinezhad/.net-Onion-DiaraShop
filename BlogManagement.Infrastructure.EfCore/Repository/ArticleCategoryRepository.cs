@@ -1,5 +1,6 @@
 ﻿using BlogManagement.Application.Contract.ArticleCategory;
 using BlogManagement.Domain.ArticleCategoryAgg;
+using Framework.Application;
 using Framework.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,18 +25,22 @@ public class ArticleCategoryRepository : RepositoryBase<long, ArticleCategory>, 
             Keywords = x.Keywords,
             MetaDescription = x.MetaDescription,
             ShowOrder = x.ShowOrder,
-            Slug = x.Slug
-        }).FirstOrDefault(x => x.Id == id);
+            Slug = x.Slug,
+            PictureAlt = x.PictureAlt,
+            PictureTitle = x.PictureTitle
+        }).FirstOrDefault(x => x.Id == id) ?? throw new KeyNotFoundException();
     }
 
     public List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel searchModel)
     {
         var query = _blogContext.ArticleCategories.Select(x => new ArticleCategoryViewModel
         {
+            Id = x.Id,
             Picture = x.Picture,
             Description = x.Description,
             Name = x.Name,
-            ShowOrder = x.ShowOrder
+            ShowOrder = x.ShowOrder,
+            CreationDate = x.CreationDate.ToFarsi()
         });
 
         if (!string.IsNullOrWhiteSpace(searchModel.Name))

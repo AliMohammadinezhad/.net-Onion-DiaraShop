@@ -2,8 +2,11 @@
 
 public class ArticleCategoryViewModel
 {
-    public string? Name { get; set; }
+    public long Id { get; set; }
+    public required string Name { get; set; }
     public string? Picture { get; set; }
-    public string? Description { get; set; }
+    public required string Description { get; set; }
     public int ShowOrder { get; set; }
+    public required string CreationDate { get; set; }
+    public long ArticlesCount { get; set; }
 }

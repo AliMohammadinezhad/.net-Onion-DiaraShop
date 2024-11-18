@@ -4,19 +4,33 @@ namespace BlogManagement.Domain.ArticleCategoryAgg;
 
 public class ArticleCategory : EntityBase
 {
-    public string? Name { get; private set; }
-    public string? Picture { get; private set; }
-    public string? Description { get; private set; }
+    public string Name { get; private set; }
+    public string Picture { get; private set; }
+    public string Description { get; private set; }
+    public string PictureAlt { get; private set; }
+    public string PictureTitle { get; private set; }
     public int ShowOrder { get; private set; }
-    public string? Slug { get; private set; }
-    public string? Keywords { get; private set; }
-    public string? MetaDescription { get; private set; }
+    public string Slug { get; private set; }
+    public string Keywords { get; private set; }
+    public string MetaDescription { get; private set; }
     public string? CanonicalAddress { get; private set; }
 
-    public ArticleCategory(string? name, string? picture, string? description, int showOrder, string? slug, string? keywords, string? metaDescription, string? canonicalAddress)
+    public ArticleCategory(
+        string name,
+        string pictureAlt,
+        string pictureTitle,
+        string picture,
+        string description,
+        int showOrder,
+        string slug,
+        string keywords,
+        string metaDescription,
+        string? canonicalAddress)
     {
         Name = name;
         Picture = picture;
+        PictureAlt = pictureAlt;
+        PictureTitle = pictureTitle;
         Description = description;
         ShowOrder = showOrder;
         Slug = slug;
@@ -25,11 +39,14 @@ public class ArticleCategory : EntityBase
         CanonicalAddress = canonicalAddress;
     }
 
-    public void Edit(string? name, string? picture, string? description, int showOrder, string? slug, string? keywords, string? metaDescription, string? canonicalAddress)
+    public void Edit(string name, string picture, string description, int showOrder, string slug, string keywords,
+        string metaDescription, string? canonicalAddress, string pictureAlt, string pictureTitle)
     {
         Name = name;
         if (!string.IsNullOrWhiteSpace(picture))
             Picture = picture;
+        PictureAlt = pictureAlt;
+        PictureTitle = pictureTitle;
         Description = description;
         ShowOrder = showOrder;
         Slug = slug;

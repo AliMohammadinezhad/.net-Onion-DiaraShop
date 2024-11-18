@@ -23,7 +23,7 @@ public class ArticleCategoryApplication : IArticleCategoryApplication
 
         var slug = command.Slug.Slugify();
         var filePath = _fileUploader.Upload(command.Picture, slug);
-        var articleCategory = new ArticleCategory(command.Name, filePath, command.Description, command.ShowOrder,
+        var articleCategory = new ArticleCategory(command.Name, command.PictureAlt, command.PictureTitle, filePath, command.Description, command.ShowOrder,
             command.Slug, command.Keywords, command.MetaDescription, command.CanonicalAddress);
 
         _articleCategoryRepository.Create(articleCategory);
@@ -46,7 +46,7 @@ public class ArticleCategoryApplication : IArticleCategoryApplication
         var slug = command.Slug.Slugify();
         var filePath = _fileUploader.Upload(command.Picture, slug);
         articleCategory.Edit(command.Name, filePath, command.Description, command.ShowOrder, command.Slug,
-            command.Keywords, command.MetaDescription, command.CanonicalAddress);
+            command.Keywords, command.MetaDescription, command.CanonicalAddress, command.PictureAlt, command.PictureTitle);
 
         _articleCategoryRepository.SaveChanges();
         return operation.Succeeded();

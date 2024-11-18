@@ -1,3 +1,4 @@
+using BlogManagement.Infrastructure.Configuration;
 using DiscountManagement.infrastructure.Configuration;
 using Framework.Application;
 using InventoryManagement.Infrastructure.Configuration;
@@ -9,16 +10,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("BigShopDb");
 
-ShopManagementDependencyInjection.Configuration(builder.Services, connectionString);
-DiscountManagementDependencyInjection.Configuration(builder.Services, connectionString);
-InventoryDependencyInjection.Configure(builder.Services, connectionString);
+if (connectionString != null)
+{
+    ShopManagementDependencyInjection.Configuration(builder.Services, connectionString);
+    DiscountManagementDependencyInjection.Configuration(builder.Services, connectionString);
+    InventoryManagementDependencyInjection.Configuration(builder.Services, connectionString);
+    BlogManagementDependencyInjection.Configuration(builder.Services, connectionString);
+}
 
 builder.Services.AddTransient<IFileUploader, FileUploader>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configuration the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");

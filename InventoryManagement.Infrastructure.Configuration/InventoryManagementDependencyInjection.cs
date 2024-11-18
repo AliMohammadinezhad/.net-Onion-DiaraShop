@@ -8,9 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace InventoryManagement.Infrastructure.Configuration
 {
-    public class InventoryDependencyInjection
+    public class InventoryManagementDependencyInjection
     {
-        public static void Configure(IServiceCollection services, string connectionString)
+        public static void Configuration(IServiceCollection services, string connectionString)
         {
             services.AddTransient<IInventoryRepository, InventoryRepository>();
             services.AddTransient<IInventoryApplication, InventoryApplication>();

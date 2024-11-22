@@ -2,16 +2,20 @@
 using BlogManagement.Domain.ArticleCategoryAgg;
 using Framework.Application;
 using Framework.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 
 namespace BlogManagement.Infrastructure.EfCore.Repository;
 
-public class ArticleCategoryRepository : RepositoryBase<long, ArticleCategory>,  IArticleCategoryRepository
+public class ArticleCategoryRepository : RepositoryBase<long, ArticleCategory>, IArticleCategoryRepository
 {
     private readonly BlogContext _blogContext;
     public ArticleCategoryRepository(BlogContext context) : base(context)
     {
         _blogContext = context;
+    }
+
+    public string GetSlugBy(long id)
+    {
+        return _blogContext.ArticleCategories.Select(x => new { x.Id, x.Slug }).FirstOrDefault(x => x.Id == id)?.Slug;
     }
 
     public EditArticleCategory GetDetails(long id)

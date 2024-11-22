@@ -18,6 +18,15 @@ public class ArticleCategoryRepository : RepositoryBase<long, ArticleCategory>, 
         return _blogContext.ArticleCategories.Select(x => new { x.Id, x.Slug }).FirstOrDefault(x => x.Id == id)?.Slug;
     }
 
+    public List<ArticleCategoryViewModel> GetArticleCategories()
+    {
+        return _blogContext.ArticleCategories.Select(x => new ArticleCategoryViewModel
+        {
+            Id = x.Id,
+            Name = x.Name
+        }).ToList();
+    }
+
     public EditArticleCategory GetDetails(long id)
     {
         return _blogContext.ArticleCategories.Select(x => new EditArticleCategory

@@ -33,7 +33,7 @@ public class CreateArticle
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string MetaDescription { get;  set; }
     
-    public string CanonicalAddress { get;  set; }
+    public string? CanonicalAddress { get;  set; }
     
     [Range(1, long.MaxValue, ErrorMessage = ValidationMessages.IsRequired)]
     public long CategoryId { get;  set; }

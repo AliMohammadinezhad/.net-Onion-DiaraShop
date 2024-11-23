@@ -52,4 +52,8 @@
     <Folder Include="wwwroot\ProductPictures\لوستر-8-پر\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="TinyMCE" Version="7.5.1" />
+  </ItemGroup>
+
 </Project>

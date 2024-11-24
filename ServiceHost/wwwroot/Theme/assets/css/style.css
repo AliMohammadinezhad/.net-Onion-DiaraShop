@@ -2713,8 +2713,6 @@ select {
         .single-slider-post__date-sticker span.month {
             font-weight: 500;
             line-height: 12px;
-            margin-bottom: 10px;
-            color: #929292;
         }
 
         .single-slider-post__date-sticker span.day {

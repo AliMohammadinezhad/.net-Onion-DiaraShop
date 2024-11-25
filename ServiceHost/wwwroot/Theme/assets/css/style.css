@@ -2682,8 +2682,8 @@ select {
 
 .single-slider-post__date-sticker {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 0px;
+    right: 0px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -2724,6 +2724,7 @@ select {
 
 .single-slider-post__content .title {
     font-size: 16px;
+    font-weight: bold;
     line-height: 1;
     line-height: 18px;
     margin-top: 20px;
@@ -2748,6 +2749,7 @@ select {
 
 .single-slider-post__content .short-desc {
     line-height: 24px;
+    font-weight: 50;
     margin-bottom: 0;
 }
 

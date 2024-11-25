@@ -13,7 +13,7 @@ public class CreateArticle
     public string ShortDescription { get;  set; }
     public string Description { get;  set; }
     
-    public IFormFile Picture { get;  set; }
+    public IFormFile? Picture { get;  set; }
     
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string PictureAlt { get;  set; }

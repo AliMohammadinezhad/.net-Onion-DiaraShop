@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /ServiceHost/wwwroot/lib/tinymce
+/ServiceHost/wwwroot/ProductPictures/برنامه-نویسی-با-معماری-onion/

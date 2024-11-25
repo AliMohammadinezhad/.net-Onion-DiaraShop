@@ -1,4 +1,5 @@
-﻿using BlogManagement.Infrastructure.EfCore;
+﻿using BlogManagement.Domain.ArticleAgg;
+using BlogManagement.Infrastructure.EfCore;
 using Framework.Application;
 using Microsoft.EntityFrameworkCore;
 using Query.Contracts.Article;
@@ -14,7 +15,7 @@ public class ArticleQuery : IArticleQuery
         _context = context;
     }
 
-    public List<ArticleQueryModel> LatestArticles()
+    public ArticleQueryModel GetArticleDetails(string slug)
     {
         return _context.Articles
             .Include(x => x.Category)
@@ -25,7 +26,6 @@ public class ArticleQuery : IArticleQuery
                 Picture = x.Picture,
                 CategorySlug = x.Category.Slug,
                 CanonicalAddress = x.CanonicalAddress,
-                CategoryId = x.CategoryId,
                 CategoryName = x.Category.Name,
                 Description = x.Description,
                 Keywords = x.Keywords,
@@ -36,6 +36,23 @@ public class ArticleQuery : IArticleQuery
                 ShortDescription = x.ShortDescription,
                 Title = x.Title
 
+            }).FirstOrDefault(x => x.Slug == slug);
+    }
+
+    public List<ArticleQueryModel> LatestArticles()
+    {
+        return _context.Articles
+            .Include(x => x.Category)
+            .Where(x => x.PublishDate <= DateTime.Now)
+            .Select(x => new ArticleQueryModel
+            {
+                Slug = x.Slug,
+                Picture = x.Picture,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle,
+                PublishDate = x.PublishDate.ToFarsi(),
+                ShortDescription = x.ShortDescription,
+                Title = x.Title
             }).ToList();
     }
 }

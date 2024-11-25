@@ -8,6 +8,7 @@ using BlogManagement.Infrastructure.EfCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Query.Contracts.Article;
+using Query.Contracts.ArticleCategory;
 using Query.Query;
 
 namespace BlogManagement.Infrastructure.Configuration;
@@ -23,6 +24,7 @@ public class BlogManagementDependencyInjection
         services.AddTransient<IArticleRepository, ArticleRepository>();
 
         services.AddTransient<IArticleQuery, ArticleQuery>();
+        services.AddTransient<IArticleCategoryQuery, ArticleCategoryQuery>();
 
         services.AddDbContext<BlogContext>(x => x.UseSqlServer(connectionString));
     }

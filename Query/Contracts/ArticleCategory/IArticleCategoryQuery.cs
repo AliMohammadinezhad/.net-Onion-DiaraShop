@@ -2,5 +2,6 @@
 
 public interface IArticleCategoryQuery
 {
+    ArticleCategoryQueryModel getArticleCategoryBySlug(string slug);
     List<ArticleCategoryQueryModel> GetArticleCategories();
 }

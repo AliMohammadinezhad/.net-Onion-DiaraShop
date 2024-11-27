@@ -17,7 +17,7 @@ public class ArticleQuery : IArticleQuery
 
     public ArticleQueryModel GetArticleDetails(string slug)
     {
-        return _context.Articles
+        var article = _context.Articles
             .Include(x => x.Category)
             .Where(x => x.PublishDate <= DateTime.Now)
             .Select(x => new ArticleQueryModel
@@ -37,6 +37,12 @@ public class ArticleQuery : IArticleQuery
                 Title = x.Title
 
             }).FirstOrDefault(x => x.Slug == slug);
+        if (article != null)
+        {
+            article.KewordList = article.Keywords.Split("،").ToList();
+        }
+
+        return article;
     }
 
     public List<ArticleQueryModel> LatestArticles()

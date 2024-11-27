@@ -1,19 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Query;
 using Query.Contracts.ProductCategory;
+using Query.Contracts.ArticleCategory;
 
 namespace ServiceHost.ViewComponents;
 
 public class MenuViewComponent : ViewComponent
 {
     private readonly IProductCategoryQuery _productCategory;
-
-    public MenuViewComponent(IProductCategoryQuery productCategory)
+    private readonly IArticleCategoryQuery _articleCategory;
+    public MenuViewComponent(IProductCategoryQuery productCategory, IArticleCategoryQuery articleCategory)
     {
         _productCategory = productCategory;
+        _articleCategory = articleCategory;
     }
 
     public IViewComponentResult Invoke()
     {
-        return View();
+        var result = new MenuModel
+        {
+            ArticleCategories = _articleCategory.GetArticleCategories(),
+            productCategories = _productCategory.GetProductCategories()
+        };
+        return View(result);
     }
 }

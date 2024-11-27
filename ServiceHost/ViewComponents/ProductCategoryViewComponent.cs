@@ -14,7 +14,7 @@ public class ProductCategoryViewComponent : ViewComponent
 
     public IViewComponentResult Invoke()
     {
-        var productCategoryQueryModels = productCategoryQuery.GetProductCategoryQueryModels();
+        var productCategoryQueryModels = productCategoryQuery.GetProductCategories();
         return View(productCategoryQueryModels);
     }
 }

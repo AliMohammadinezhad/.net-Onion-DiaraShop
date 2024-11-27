@@ -74,7 +74,7 @@ public class ProductCategoryQuery : IProductCategoryQuery
 
     }
 
-    public List<ProductCategoryQueryModel> GetProductCategoryQueryModels()
+    public List<ProductCategoryQueryModel> GetProductCategories()
     {
         return _context.ProductCategories.Select(x => new ProductCategoryQueryModel
         {

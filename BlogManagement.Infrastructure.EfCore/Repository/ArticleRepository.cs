@@ -48,7 +48,7 @@ public class ArticleRepository : RepositoryBase<long, Article>, IArticleReposito
             Picture = x.Picture,
             Title = x.Title,
             PublishDate = x.PublishDate.ToFarsi(),
-            ShortDescription = x.ShortDescription,
+            ShortDescription = x.ShortDescription.Substring(0, Math.Min(x.ShortDescription.Length, 50)) + "...",
             CategoryId = x.CategoryId
         });
 

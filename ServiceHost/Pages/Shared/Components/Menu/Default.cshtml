@@ -1,4 +1,6 @@
-﻿<div class="header-area header-sticky">
+﻿@model Query.MenuModel
+
+<div class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -17,20 +19,28 @@
 
 
                                 <li class="menu-item-has-children">
-                                    <a href="blog-left-sidebar.html">محصولات</a>
+                                    <a>محصولات</a>
                                     <ul class="sub-menu">
-                                        <li>
-                                            <a href="blog-left-sidebar.html">Blog Left Sidebar</a>
-                                        </li>
+                                        @foreach (var productCategory in Model.productCategories)
+                                        {
+                                            <li>
+                                                <a asp-page="/ProductCategory" asp-route-categorySlug="@productCategory.Slug">@productCategory.Name</a>
+                                            </li>
+                                        }
                                     </ul>
                                 </li>
                                 
                                 <li class="menu-item-has-children">
-                                    <a href="blog-left-sidebar.html">مقالات</a>
+                                    <a>مقالات</a>
                                     <ul class="sub-menu">
-                                        <li>
-                                            <a href="blog-left-sidebar.html">Blog Left Sidebar</a>
-                                        </li>
+                                        @foreach (var articleCategory in Model.ArticleCategories)
+                                        {
+                                            <li>
+                                                <a asp-page="/ArticleCategory" asp-route-articleCategorySlug="@articleCategory.Slug">
+                                                    @articleCategory.Name
+                                                </a>
+                                            </li>
+                                        }
                                     </ul>
                                 </li>
 

@@ -1,6 +1,8 @@
-﻿namespace Query.Contracts.ArticleCategory;
+﻿using Query.Contracts.Article;
 
-public class ArticleCategoryQueryModel
+namespace Query.Contracts.ArticleCategory;
+
+public class  ArticleCategoryQueryModel
 {
     public long Id { get; set; }
     public string Name { get; set; }
@@ -11,7 +13,9 @@ public class ArticleCategoryQueryModel
     public int ShowOrder { get; set; }
     public string Slug { get; set; }
     public string Keywords { get; set; }
+    public List<string> KeywordList { get; set; }
     public string MetaDescription { get; set; }
     public string? CanonicalAddress { get; set; }
     public long ArticleCount { get; set; }
+    public List<ArticleQueryModel> Articles { get; set; }
 }

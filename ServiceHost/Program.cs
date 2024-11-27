@@ -1,3 +1,5 @@
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using BlogManagement.Infrastructure.Configuration;
 using DiscountManagement.infrastructure.Configuration;
 using Framework.Application;
@@ -17,6 +19,8 @@ if (connectionString != null)
     InventoryManagementDependencyInjection.Configuration(builder.Services, connectionString);
     BlogManagementDependencyInjection.Configuration(builder.Services, connectionString);
 }
+
+builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
 
 builder.Services.AddTransient<IFileUploader, FileUploader>();
 builder.Services.AddRazorPages();

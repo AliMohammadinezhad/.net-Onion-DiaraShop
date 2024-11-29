@@ -1,9 +1,8 @@
-﻿using Framework.Application;
-using ShopManagement.Contracts.Comment;
-using ShopManagement.Domain.CommentAgg;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+﻿using CommentManagement.Contract.Comment;
+using CommentManagement.Domain.CommentAgg;
+using Framework.Application;
 
-namespace ShopManagement.Application;
+namespace CommentManagement.Application;
 
 public class CommentApplication : ICommentApplication
 {
@@ -17,7 +16,7 @@ public class CommentApplication : ICommentApplication
     public OperationResult Add(AddComment command)
     {
         var operation = new OperationResult();
-        var comment = new Comment(command.Name, command.Email, command.Message, command.ProductId);
+        var comment = new Comment(command.Name, command.Email, command.Message, command.OwnerRecordId, command.Type, command.Website, command.ParentId);
         
         _commentRepository.Create(comment);
         _commentRepository.SaveChanges();

@@ -1,10 +1,10 @@
+using CommentManagement.Contract.Comment;
 using Framework.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ShopManagement.Contracts.Comment;
 using ShopManagement.Contracts.Slide;
 
-namespace ServiceHost.Areas.Administration.Pages.Shop.Comments;
+namespace ServiceHost.Areas.Administration.Pages.Comments;
     public class IndexModel : PageModel
     {
         [TempData] public string Message { get; set; }

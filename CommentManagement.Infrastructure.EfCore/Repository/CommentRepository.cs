@@ -1,15 +1,14 @@
-﻿using Framework.Application;
+﻿using CommentManagement.Contract.Comment;
+using CommentManagement.Domain.CommentAgg;
+using Framework.Application;
 using Framework.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using ShopManagement.Contracts.Comment;
-using ShopManagement.Domain.CommentAgg;
 
-namespace ShopManagement.Infrastructure.EfCore.Repository;
+namespace CommentManagement.Infrastructure.EfCore.Repository;
 
 public class CommentRepository : RepositoryBase<long, Comment>, ICommentRepository
 {
-    private readonly ApplicationDbContext _context;
-    public CommentRepository(ApplicationDbContext context) : base(context)
+    private readonly CommentContext _context;
+    public CommentRepository(CommentContext context) : base(context)
     {
         _context = context;
     }
@@ -18,17 +17,16 @@ public class CommentRepository : RepositoryBase<long, Comment>, ICommentReposito
     public List<CommentViewModel> Search(CommentSearchModel searchModel)
     {
         var query = _context.Comments
-            .Include(x => x.Product)
             .Select(x => new CommentViewModel
         {
             Id = x.Id,
+            Name = x.Name,
             Email = x.Email,
+            Website = x.Website,
+            Message = x.Message,
             IsCancelled = x.IsCancelled,
             IsConfirmed = x.IsConfirmed,
-            Message = x.Message,
-            Name = x.Name,
-            ProductId = x.ProductId,
-            ProductName = x.Product.Name,
+            OwnerRecordId = x.OwnerRecordId,
             CommentDate = x.CreationDate.ToFarsi()
         });
 

@@ -1,7 +1,8 @@
+using CommentManagement.Contract.Comment;
+using CommentManagement.Infrastructure.EfCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Query.Contracts.Product;
-using ShopManagement.Contracts.Comment;
 
 namespace ServiceHost.Pages
 {
@@ -18,13 +19,14 @@ namespace ServiceHost.Pages
 
         public void OnGet(string productSlug)
         {
-            Product = _productQuery.GetDetails(productSlug);
+            Product = _productQuery.GetProductDetails(productSlug);
         }
 
         public RedirectToPageResult OnPost(AddComment command, string productSlug)
         {
+            command.Type = CommentType.Product;
             var result = _commentApplication.Add(command);
-            return RedirectToPage("/Product", new {productSlug= productSlug});
+            return RedirectToPage("/Product", new { productSlug = productSlug });
         }
     }
 }

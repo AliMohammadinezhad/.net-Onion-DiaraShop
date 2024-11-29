@@ -1,9 +1,9 @@
-﻿using DiscountManagement.Infrastructure.EfCore;
+﻿using CommentManagement.Infrastructure.EfCore;
+using DiscountManagement.Infrastructure.EfCore;
 using Framework.Application;
 using InventoryManagement.Infrastructure.EfCore;
 using Microsoft.EntityFrameworkCore;
 using Query.Contracts.Product;
-using ShopManagement.Domain.CommentAgg;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EfCore;
 
@@ -14,21 +14,21 @@ public class ProductQuery : IProductQuery
     private readonly ApplicationDbContext _context;
     private readonly InventoryContext _inventoryContext;
     private readonly DiscountContext _discountContext;
-
+    private readonly CommentContext _commentContext;
     public ProductQuery(ApplicationDbContext context, InventoryContext inventoryContext,
-        DiscountContext discountContext)
+        DiscountContext discountContext, CommentContext commentContext)
     {
         _context = context;
         _inventoryContext = inventoryContext;
         _discountContext = discountContext;
+        _commentContext = commentContext;
     }
 
-    public ProductQueryModel GetDetails(string slug)
+    public ProductQueryModel GetProductDetails(string slug)
     {
         var product = _context.Products
             .Include(x => x.Category)
             .Include(x => x.ProductPictures)
-            .Include(x => x.Comments)
             .Select(product => new ProductQueryModel()
             {
                 Id = product.Id,
@@ -45,51 +45,59 @@ public class ProductQuery : IProductQuery
                 MetaDescription = product.MetaDescription,
                 ShortDescription = product.ShortDescription,
                 Pictures = MapProductPictures(product.ProductPictures),
-                Comments = MapComments(product.Comments)
-            }).AsNoTracking().FirstOrDefault(x => x.Slug == slug);
+            })
+            .AsNoTracking()
+            .FirstOrDefault(x => x.Slug == slug);
+
+        if (product == null) return new ProductQueryModel();
 
         var inventory = _inventoryContext.Inventory
             .Select(x => new { x.ProductId, x.UnitPrice, x.InStock })
             .AsNoTracking().ToList();
+
         var discounts = _discountContext.CustomerDiscounts
             .Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now)
             .Select(x => new { x.DiscountRate, x.ProductId, x.EndDate })
             .AsNoTracking().ToList();
 
-        if (product == null) return new ProductQueryModel();
+        var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
 
-            var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
-
-            if (productInventory == null) return product;
+        if (productInventory != null)
+        {
             var price = productInventory.UnitPrice;
             product.Price = price.ToMoney();
             product.IsInStock = productInventory.InStock;
 
             var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
-         
-            if (discount == null) return product;
+            if (discount != null)
+            {
+                var discountRate = discount.DiscountRate;
+                product.DiscountRate = discountRate;
+                product.DiscountExpireDate = discount.EndDate.ToDiscountFormat();
+                product.HasDiscount = discountRate > 0;
 
-            var discountRate = discount.DiscountRate;
-            product.DiscountRate = discountRate;
-            product.DiscountExpireDate = discount.EndDate.ToDiscountFormat();
-            product.HasDiscount = discountRate > 0;
+                var discountAmount = Math.Round(discountRate * price / 100);
+                product.PriceWithDiscount = (price - discountAmount).ToMoney();
+            }
+        }
 
-            var discountAmount = Math.Round(discountRate * price / 100);
-            product.PriceWithDiscount = (price - discountAmount).ToMoney();
-
-            return product;
-    }
-
-    private static List<CommentQueryModel> MapComments(List<Comment> comments)
-    {
-        return comments.Where(x => x is { IsConfirmed: true, IsCancelled: false })
+        // Always populate the comments property
+        product.Comments = _commentContext.Comments
+            .Where(x => x.IsConfirmed == true && x.IsCancelled == false)
+            .Where(x => x.OwnerRecordId == product.Id)
+            .Where(x => x.Type == CommentType.Product)
             .Select(x => new CommentQueryModel
-        {
-            Id = x.Id,
-            Message = x.Message,
-            Name = x.Name
-        }).OrderByDescending(x=>x.Id).ToList();
+            {
+                Id = x.Id,
+                Message = x.Message,
+                Name = x.Name
+            })
+            .OrderByDescending(x => x.Id)
+            .ToList();
+
+        return product;
     }
+
 
     private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)
     {

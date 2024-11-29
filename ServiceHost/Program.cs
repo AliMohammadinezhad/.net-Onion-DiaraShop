@@ -1,6 +1,7 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using BlogManagement.Infrastructure.Configuration;
+using CommentManagement.Infrastructure.Configuration;
 using DiscountManagement.infrastructure.Configuration;
 using Framework.Application;
 using InventoryManagement.Infrastructure.Configuration;
@@ -18,6 +19,7 @@ if (connectionString != null)
     DiscountManagementDependencyInjection.Configuration(builder.Services, connectionString);
     InventoryManagementDependencyInjection.Configuration(builder.Services, connectionString);
     BlogManagementDependencyInjection.Configuration(builder.Services, connectionString);
+    CommentManagementDependencyInjection.Configuration(builder.Services, connectionString);
 }
 
 builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));

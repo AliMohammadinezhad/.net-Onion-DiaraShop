@@ -1,4 +1,6 @@
-﻿namespace Query.Contracts.Product;
+﻿using Query.Contracts.Comment;
+
+namespace Query.Contracts.Product;
 
 public class ProductQueryModel
 {

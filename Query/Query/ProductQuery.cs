@@ -3,6 +3,7 @@ using DiscountManagement.Infrastructure.EfCore;
 using Framework.Application;
 using InventoryManagement.Infrastructure.EfCore;
 using Microsoft.EntityFrameworkCore;
+using Query.Contracts.Comment;
 using Query.Contracts.Product;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EfCore;

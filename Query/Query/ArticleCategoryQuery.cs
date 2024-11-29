@@ -39,7 +39,9 @@ public class ArticleCategoryQuery : IArticleCategoryQuery
 
         }).FirstOrDefault(x => x.Slug == slug);
 
-        articleCategory.KeywordList = articleCategory.Keywords.Split("،").ToList();
+        if(!string.IsNullOrWhiteSpace(articleCategory?.Keywords))
+            articleCategory.KeywordList = articleCategory.Keywords.Split("،").ToList();
+        
         return articleCategory;
     }
 

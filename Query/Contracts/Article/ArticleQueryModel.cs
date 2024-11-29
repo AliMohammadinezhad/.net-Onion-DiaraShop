@@ -1,7 +1,10 @@
-﻿namespace Query.Contracts.Article;
+﻿using Query.Contracts.Comment;
+
+namespace Query.Contracts.Article;
 
 public class ArticleQueryModel
 {
+    public long Id { get; set; }
     public string Title { get;  set; }
     public string ShortDescription { get;  set; }
     public string Description { get;  set; }
@@ -17,5 +20,8 @@ public class ArticleQueryModel
     public long CategoryId { get;  set; }
     public string CategoryName { get; set; }
     public string CategorySlug { get; set; }
+    public List<CommentQueryModel> Comments { get; set; }
+    public int TotalCommentCount { get; set; }
+
 
 }

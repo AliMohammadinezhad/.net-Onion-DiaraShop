@@ -40,7 +40,7 @@
                                     <div class="product-details-slider-area">
                                         <div class="big-image-wrapper">
                                             <div class="product-details-big-image-slider-wrapper product-details-big-image-slider-wrapper--bottom-space ht-slick-slider"
-                                                data-slick-setting='{
+                                                 data-slick-setting='{
                                                         "slidesToShow": 1,
                                                         "slidesToScroll": 1,
                                                         "arrows": false,
@@ -117,7 +117,7 @@
                                         <div class="product-rating">
 
                                             <span class="review-count">
-                                                <a href="#">(2 reviews)</a> | <a href="#">نظر دهید</a>
+                                                <a href="#goToComment">نظر (@Model.Product.Comments.Count)</a> | <a href="#">نظر دهید</a>
                                             </span>
                                         </div>
 
@@ -166,7 +166,7 @@
 
                                         </div>
 
-                                        <div class="social-share-buttons mt-20">
+                                        @* <div class="social-share-buttons mt-20">
                                             <h5>این محصول را به اشتراک بگذارید</h5>
                                             <ul>
                                                 <li>
@@ -190,9 +190,9 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                        </div>
-                                        <p class="single-info mb-0">
-                                            تگ ها: @Model.Product.Keyword
+                                        </div> *@
+                                        <p class="single-info mb-0 mt-5">
+                                        تگ ها: @Model.Product.Keyword
 
 
                                     </div></div>
@@ -229,7 +229,7 @@
                                                  aria-labelledby="review-tab">
 
                                                 <div class="product-rating-wrap">
-                                                   @*  <div class="pro-avg-rating">
+                                                    @*  <div class="pro-avg-rating">
                                                         <h4>4.5 <span>(Overall)</span></h4>
                                                         <span>Based on 9 Comments</span>
                                                     </div>
@@ -275,13 +275,13 @@
                                                             <span>(0)</span>
                                                         </div>
                                                     </div> *@
-                                                    <div class="ratings-wrapper">
+                                                    <div class="ratings-wrapper" >
                                                         @foreach (var comment in Model.Product.Comments)
                                                         {
                                                             <div class="sin-ratings">
                                                                 <div class="rating-author">
                                                                     <h3>@comment.Name</h3>
-@*                                                                     <div class="rating-star">
+                                                                    @*                                                                     <div class="rating-star">
                                                                         <i class="fa fa-star"></i>
                                                                         <i class="fa fa-star"></i>
                                                                         <i class="fa fa-star"></i>
@@ -297,7 +297,7 @@
                                                         }
 
                                                     </div>
-                                                    <div class="rating-form-wrapper fix">
+                                                    <div class="rating-form-wrapper fix" >
                                                         <h3>نظر خود را با ما به اشتراک بگذارید.</h3>
                                                         <form method="post">
                                                             <div class="rating-form row">

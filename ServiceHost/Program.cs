@@ -1,5 +1,6 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using AccountManagement.Infrastructure.Configuration;
 using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Infrastructure.Configuration;
 using DiscountManagement.infrastructure.Configuration;
@@ -20,11 +21,13 @@ if (connectionString != null)
     InventoryManagementDependencyInjection.Configuration(builder.Services, connectionString);
     BlogManagementDependencyInjection.Configuration(builder.Services, connectionString);
     CommentManagementDependencyInjection.Configuration(builder.Services, connectionString);
+    AccountManagementDependencyInjection.Configuration(builder.Services, connectionString);
 }
 
 builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
 
 builder.Services.AddTransient<IFileUploader, FileUploader>();
+builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

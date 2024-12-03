@@ -31,14 +31,12 @@ public class Account : EntityBase
     public void Edit(
         string fullName,
         string username,
-        string password,
         string mobile,
         long roleId,
         string profilePhoto)
     {
         FullName = fullName;
         Username = username;
-        Password = password;
         Mobile = mobile;
         RoleId = roleId;
 

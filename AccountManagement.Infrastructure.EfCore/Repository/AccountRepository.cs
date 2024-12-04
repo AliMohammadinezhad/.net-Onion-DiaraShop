@@ -1,6 +1,8 @@
 ﻿using AccountManagement.Application.Contract.Account;
 using AccountManagement.Domain.AccountAgg;
+using Framework.Application;
 using Framework.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infrastructure.EfCore.Repository;
 
@@ -27,15 +29,18 @@ public class AccountRepository : RepositoryBase<long, Account>, IAccountReposito
 
     public List<AccountViewModel> Search(AccountSearchModel searchModel)
     {
-        var query = _context.Accounts.Select(x => new AccountViewModel()
+        var query = _context.Accounts
+            .Include(x => x.Role)
+            .Select(x => new AccountViewModel()
         {
             Id = x.Id,
             Username = x.Username,
             FullName = x.FullName,
             Mobile = x.Mobile,
             ProfilePhoto = x.ProfilePhoto,
-            Role = "مدیر سیستم",
-            RoleId = 2
+            Role = x.Role.Name,
+            RoleId = x.RoleId,
+            CreationDate = x.CreationDate.ToFarsi()
         });
 
         if (!string.IsNullOrWhiteSpace(searchModel.Username))

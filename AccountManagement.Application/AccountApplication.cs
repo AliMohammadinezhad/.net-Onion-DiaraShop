@@ -39,7 +39,7 @@ namespace AccountManagement.Application
             var operation = new OperationResult();
             var account = _accountRepository.Get(command.Id);
 
-            if (_accountRepository.Exists(x => x.Username == command.Username || x.Mobile == command.Mobile && x.Id != command.Id))
+            if (_accountRepository.Exists(x => (x.Username == command.Username || x.Mobile == command.Mobile) && x.Id != command.Id))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
             if (account == null)
@@ -60,7 +60,7 @@ namespace AccountManagement.Application
             if (account == null)
                 return operation.Failed(ApplicationMessages.RecordNotFound);
 
-            if (command.Password != account.Password)
+            if (command.Password != command.NewPassword)
                 return operation.Failed(ApplicationMessages.PasswordsNotMatch);
 
 

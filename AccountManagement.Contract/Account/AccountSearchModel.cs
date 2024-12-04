@@ -2,9 +2,9 @@
 
 public class AccountSearchModel
 {
-    public string FullName { get; set; }
-    public string Username { get; set; }
-    public string Mobile { get; set; }
-    public long RoleId { get; set; }
+    public string FullName { get; init; }
+    public string Username { get; init; }
+    public string Mobile { get; init; }
+    public long RoleId { get; init; }
 
 }

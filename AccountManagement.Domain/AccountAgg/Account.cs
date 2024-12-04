@@ -1,4 +1,5 @@
-﻿using Framework.Domain;
+﻿using AccountManagement.Domain.RoleAgg;
+using Framework.Domain;
 
 namespace AccountManagement.Domain.AccountAgg;
 
@@ -9,6 +10,7 @@ public class Account : EntityBase
     public string Password { get; private set; }
     public string Mobile { get; private set; }
     public long RoleId { get; private set; }
+    public Role Role { get; private set; }
     public string ProfilePhoto { get; private set; }
 
     public Account(
@@ -48,4 +50,6 @@ public class Account : EntityBase
     {
         Password = password;
     }
+
+
 }

@@ -6,12 +6,15 @@ using CommentManagement.Infrastructure.Configuration;
 using DiscountManagement.infrastructure.Configuration;
 using Framework.Application;
 using InventoryManagement.Infrastructure.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using ServiceHost;
 using ShopManagement.infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpContextAccessor();
+
 var connectionString = builder.Configuration.GetConnectionString("BigShopDb");
 
 if (connectionString != null)
@@ -26,9 +29,27 @@ if (connectionString != null)
 
 builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
 
+builder.Services.AddTransient<IAuthHelper, AuthHelper>();
 builder.Services.AddTransient<IFileUploader, FileUploader>();
 builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 builder.Services.AddRazorPages();
+
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
+});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+    {
+        options.LoginPath = new PathString("/Account");
+        options.LogoutPath = new PathString("/Account");
+        options.AccessDeniedPath = new PathString("/AccessDenied");
+    });
+
+
 
 var app = builder.Build();
 
@@ -40,9 +61,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseAuthentication();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCookiePolicy();
 app.UseRouting();
 
 app.UseAuthorization();

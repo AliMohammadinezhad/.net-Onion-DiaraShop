@@ -1,4 +1,6 @@
-﻿@model Query.MenuModel
+﻿@using Framework.Application
+@model Query.MenuModel
+@inject IAuthHelper AuthHelper
 
 <div class="header-area header-sticky">
     <div class="container">
@@ -27,9 +29,9 @@
                                                 <a asp-page="/ProductCategory" asp-route-categorySlug="@productCategory.Slug">@productCategory.Name</a>
                                             </li>
                                         }
-                                    </ul>
+</ul>
                                 </li>
-                                
+
                                 <li class="menu-item-has-children">
                                     <a>مقالات</a>
                                     <ul class="sub-menu">
@@ -49,7 +51,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                        </div>
                     <div class="header-icon-wrapper">
                         <ul class="icon-list">
                             <li>
@@ -161,12 +163,18 @@
                                         <div class="single-settings-block">
                                             <h4 class="title">حساب کاربری</h4>
                                             <ul>
-                                                <li>
-                                                    <a href="login-register.html">ثبت نام</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login-register.html">ورود</a>
-                                                </li>
+                                                @if (!AuthHelper.IsAuthenticated())
+                                                {
+                                                    <li>
+                                                        <a asp-page="/Account">ورود | ثبت نام</a>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li>
+                                                        <a asp-page="/Account" asp-page-handler="Logout">خروج</a>
+                                                    </li>
+                                                }
                                             </ul>
                                         </div>
                                         <div class="single-settings-block">
@@ -256,7 +264,7 @@
                             </li>
                         </ul>
                     </li>
-                                
+
                     <li class="menu-item-has-children">
                         <a href="blog-left-sidebar.html">مقالات</a>
                         <ul class="sub-menu">

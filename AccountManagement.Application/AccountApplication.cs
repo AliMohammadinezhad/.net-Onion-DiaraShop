@@ -1,4 +1,5 @@
-﻿using AccountManagement.Application.Contract.Account;
+﻿using System.Security.Cryptography.X509Certificates;
+using AccountManagement.Application.Contract.Account;
 using AccountManagement.Domain.AccountAgg;
 using Framework.Application;
 using Framework.Domain;
@@ -10,11 +11,13 @@ namespace AccountManagement.Application
         private readonly IAccountRepository _accountRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IFileUploader _fileUploader;
-        public AccountApplication(IAccountRepository accountRepository, IPasswordHasher passwordHasher, IFileUploader fileUploader)
+        private readonly IAuthHelper _authHelper;
+        public AccountApplication(IAccountRepository accountRepository, IPasswordHasher passwordHasher, IFileUploader fileUploader, IAuthHelper authHelper)
         {
             _accountRepository = accountRepository;
             _passwordHasher = passwordHasher;
             _fileUploader = fileUploader;
+            _authHelper = authHelper;
         }
 
         public OperationResult Create(CreateAccount command)
@@ -65,10 +68,26 @@ namespace AccountManagement.Application
 
 
             var password = _passwordHasher.Hash(command.Password);
-            
+
             account.ChangePassword(password);
             _accountRepository.SaveChanges();
 
+            return operation.Succeeded();
+        }
+
+        public OperationResult Login(Login command)
+        {
+            var operation = new OperationResult();
+            var account = _accountRepository.GetByUserName(command.Username);
+            if (account == null)
+                return operation.Failed(ApplicationMessages.WrongUserPass);
+
+            var (isVerified, needsUpgrade) = _passwordHasher.Check(account.Password, command.Password);
+            if (!isVerified)
+                return operation.Failed(ApplicationMessages.WrongUserPass);
+
+            var authViewModel = new AuthViewModel(account.Id,account.RoleId, account.FullName, account.Username);
+            _authHelper.SignIn(authViewModel);
             return operation.Succeeded();
         }
 
@@ -80,6 +99,11 @@ namespace AccountManagement.Application
         public List<AccountViewModel> Search(AccountSearchModel searchModel)
         {
             return _accountRepository.Search(searchModel);
+        }
+
+        public void Logout()
+        {
+            _authHelper.SignOut();
         }
     }
 }

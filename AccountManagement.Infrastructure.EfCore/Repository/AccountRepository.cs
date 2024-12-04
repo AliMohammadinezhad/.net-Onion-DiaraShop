@@ -1,4 +1,5 @@
-﻿using AccountManagement.Application.Contract.Account;
+﻿using System.Security.Cryptography.X509Certificates;
+using AccountManagement.Application.Contract.Account;
 using AccountManagement.Domain.AccountAgg;
 using Framework.Application;
 using Framework.Infrastructure;
@@ -12,6 +13,11 @@ public class AccountRepository : RepositoryBase<long, Account>, IAccountReposito
     public AccountRepository(AccountContext context) : base(context)
     {
         _context = context;
+    }
+
+    public Account GetByUserName(string userName)
+    {
+        return _context.Accounts.FirstOrDefault(x => x.Username == userName);
     }
 
     public EditAccount GetDetails(long id)

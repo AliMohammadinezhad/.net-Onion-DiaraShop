@@ -5,6 +5,7 @@ namespace AccountManagement.Domain.AccountAgg;
 
 public interface IAccountRepository : IRepository<long, Account>
 {
+    Account GetByUserName(string userName);
     EditAccount GetDetails(long id);
     List<AccountViewModel> Search(AccountSearchModel searchModel);
 }

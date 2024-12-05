@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace AccountManagement.Application.Contract.Account;
 
-public class CreateAccount
+public class RegisterAccount
 {
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string FullName { get;  init; }
@@ -26,7 +26,7 @@ public class CreateAccount
 
     public override bool Equals(object? obj)
     {
-        var account = obj as CreateAccount;
+        var account = obj as RegisterAccount;
         if (account == null)
             return false;
         

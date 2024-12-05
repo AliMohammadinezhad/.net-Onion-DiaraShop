@@ -5,6 +5,7 @@ using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Infrastructure.Configuration;
 using DiscountManagement.infrastructure.Configuration;
 using Framework.Application;
+using Framework.Infrastructure;
 using InventoryManagement.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ServiceHost;
@@ -49,6 +50,24 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = new PathString("/AccessDenied");
     });
 
+builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("AdminArea", policy => policy.RequireRole([Roles.Admin, Roles.ContentCreator]));
+        options.AddPolicy("Shop", policy => policy.RequireRole([Roles.Admin]));
+        options.AddPolicy("Discount", policy => policy.RequireRole([Roles.Admin]));
+        options.AddPolicy("Account", policy => policy.RequireRole([Roles.Admin]));
+}
+);
+
+builder.Services.AddRazorPages()
+    .AddRazorPagesOptions(options =>
+    {
+        options.Conventions.AuthorizeAreaFolder("Administration", "/", "AdminArea");
+        options.Conventions.AuthorizeAreaFolder("Administration", "/Shop", "Shop");
+        options.Conventions.AuthorizeAreaFolder("Administration", "/Discounts", "Discount");
+        options.Conventions.AuthorizeAreaFolder("Administration", "/Accounts", "Account");
+    }
+        );
 
 
 var app = builder.Build();

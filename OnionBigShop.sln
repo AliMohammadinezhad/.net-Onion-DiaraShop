@@ -109,13 +109,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AM.Infrastructure", "AM.Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManagement.Domain", "AccountManagement.Domain\AccountManagement.Domain.csproj", "{0382C5F5-8493-48AA-A453-25A6D94BE92B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagement.Application.Contract", "AccountManagement.Contract\AccountManagement.Application.Contract.csproj", "{5AE50D70-3318-4A85-8ECD-779CB17D2CA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManagement.Application.Contract", "AccountManagement.Contract\AccountManagement.Application.Contract.csproj", "{5AE50D70-3318-4A85-8ECD-779CB17D2CA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagement.Infrastructure.EfCore", "AccountManagement.Infrastructure.EfCore\AccountManagement.Infrastructure.EfCore.csproj", "{57A2B6E4-AB04-4976-BBE1-B752A9675CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManagement.Infrastructure.EfCore", "AccountManagement.Infrastructure.EfCore\AccountManagement.Infrastructure.EfCore.csproj", "{57A2B6E4-AB04-4976-BBE1-B752A9675CB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagement.Application", "AccountManagement.Application\AccountManagement.Application.csproj", "{59A9FC57-C2B3-46BE-99ED-8B3274EB19EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManagement.Application", "AccountManagement.Application\AccountManagement.Application.csproj", "{59A9FC57-C2B3-46BE-99ED-8B3274EB19EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManagement.Infrastructure.Configuration", "AccountManagement.Infrastructure.DependencyInjection\AccountManagement.Infrastructure.Configuration.csproj", "{B9372ACB-0A2E-41C1-BBD3-C0D3DACFCF46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManagement.Infrastructure.Configuration", "AccountManagement.Infrastructure.DependencyInjection\AccountManagement.Infrastructure.Configuration.csproj", "{B9372ACB-0A2E-41C1-BBD3-C0D3DACFCF46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

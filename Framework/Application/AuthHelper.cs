@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Framework.Infrastructure;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -43,6 +44,26 @@ public class AuthHelper : IAuthHelper
             authProperties
         );
 
+    }
+
+    public string CurrentAccountRole()
+    {
+        return IsAuthenticated() ? _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value : null;
+    }
+
+    public AuthViewModel CurrentAccountInfo()
+    {
+        var result = new AuthViewModel();
+        if (!IsAuthenticated())
+            return result;
+
+        var claims = _contextAccessor.HttpContext.User.Claims.ToList();
+        result.AccountId = long.Parse(claims.FirstOrDefault(x => x.Type == "AccountId")?.Value!);
+        result.RoleId = long.Parse(claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value!);
+        result.Username = claims.FirstOrDefault(x => x.Type == "Username")?.Value!;
+        result.FullName = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value!;
+        result.Role = Roles.GetRoleBy(result.RoleId);
+        return result;
     }
 
     public void SignOut()

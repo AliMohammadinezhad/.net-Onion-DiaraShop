@@ -49,6 +49,13 @@
                                 <li>
                                     <a href="contact.html">تماس با ما</a>
                                 </li>
+                                
+                                @if (AuthHelper.CurrentAccountRole() == "1"|| AuthHelper.CurrentAccountRole() == "3")
+                                {
+                                    <li>
+                                        <a class="text-primary" asp-area="Administration" asp-page="/Index">پنل ادمین</a>
+                                    </li>
+                                }
                             </ul>
                         </nav>
                         </div>

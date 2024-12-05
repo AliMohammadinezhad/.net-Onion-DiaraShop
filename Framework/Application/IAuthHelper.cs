@@ -3,7 +3,8 @@
 public interface IAuthHelper
 {
     bool IsAuthenticated();
-    void SignIn(AuthViewModel account);
     void SignOut();
-
+    void SignIn(AuthViewModel account);
+    string CurrentAccountRole();
+    AuthViewModel CurrentAccountInfo();
 }

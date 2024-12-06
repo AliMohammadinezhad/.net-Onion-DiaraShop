@@ -11,8 +11,4 @@
     <ProjectReference Include="..\Framework\Framework.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="RoleAgg\" />
-  </ItemGroup>
-
 </Project>

@@ -20,7 +20,7 @@ public class RoleApplication : IRoleApplication
         if (_roleRepository.Exists(x => x.Name == command.Name))
             return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
-        var role = new Role(command.Name);
+        var role = new Role(command.Name, new List<Permission>());
         _roleRepository.Create(role);
         _roleRepository.SaveChanges();
         return operation.Succeeded();
@@ -36,7 +36,7 @@ public class RoleApplication : IRoleApplication
         if (role == null)
             return operation.Failed(ApplicationMessages.RecordNotFound);
 
-        role.Edit(command.Name);
+        role.Edit(command.Name, new List<Permission>());
         _roleRepository.SaveChanges();
         return operation.Succeeded();
     }

@@ -14,5 +14,11 @@ public class RoleMapping : IEntityTypeConfiguration<Role>
         builder.Property(x => x.Name).IsRequired().HasMaxLength(128);
 
         builder.HasMany(x => x.Accounts).WithOne(x => x.Role).HasForeignKey(x => x.RoleId);
+        builder.OwnsMany(x => x.Permissions, navigationBuilder =>
+        {
+            navigationBuilder.HasKey(x => x.Id);
+            navigationBuilder.ToTable("Permissions");
+            navigationBuilder.WithOwner(x => x.Role);
+        });
     }
 }

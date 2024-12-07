@@ -19,6 +19,7 @@ public class RoleMapping : IEntityTypeConfiguration<Role>
             navigationBuilder.HasKey(x => x.Id);
             navigationBuilder.ToTable("Permissions");
             navigationBuilder.WithOwner(x => x.Role);
+            navigationBuilder.Ignore(x => x.Name);
         });
     }
 }

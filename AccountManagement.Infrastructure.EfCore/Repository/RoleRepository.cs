@@ -20,7 +20,13 @@ public class RoleRepository : RepositoryBase<long, Role>, IRoleRepository
         {
             Id = x.Id,
             Name = x.Name,
-        }).FirstOrDefault(x => x.Id == id);
+            MappedPermission = MapPermissions(x.Permissions)
+        }).AsNoTracking().FirstOrDefault(x => x.Id == id);
+    }
+
+    private static List<PermissionDTO> MapPermissions(List<Permission> permissions)
+    {
+        return permissions.Select(x => new PermissionDTO(x.Code, x.Name)).ToList();
     }
 
     public List<RoleViewModel> List()

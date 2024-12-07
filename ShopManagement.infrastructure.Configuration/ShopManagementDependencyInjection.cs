@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Framework.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Query.Contracts.Product;
 using Query.Contracts.ProductCategory;
@@ -13,6 +14,7 @@ using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Domain.SlideAgg;
+using ShopManagement.infrastructure.Configuration.Permissions;
 using ShopManagement.Infrastructure.EfCore;
 using ShopManagement.Infrastructure.EfCore.Repository;
 
@@ -39,6 +41,8 @@ public class ShopManagementDependencyInjection
         services.AddTransient<ISlideQuery, SlideQuery>();
         services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
         services.AddTransient<IProductQuery, ProductQuery>();
+
+        services.AddTransient<IPermissionExposer, ShopPermissionExposer>();
 
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 

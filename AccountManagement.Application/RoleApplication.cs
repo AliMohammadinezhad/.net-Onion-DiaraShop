@@ -36,7 +36,10 @@ public class RoleApplication : IRoleApplication
         if (role == null)
             return operation.Failed(ApplicationMessages.RecordNotFound);
 
-        role.Edit(command.Name, new List<Permission>());
+        var permissions = new List<Permission>();
+        command.Permissions.ForEach(code => permissions.Add(new Permission(code)));
+
+        role.Edit(command.Name, permissions);
         _roleRepository.SaveChanges();
         return operation.Succeeded();
     }

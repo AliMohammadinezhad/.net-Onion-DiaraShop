@@ -1,10 +1,11 @@
 ﻿@page "{id}"
+@using BlogManagement.Infrastructure.Configuration.Permissions
 @using Microsoft.EntityFrameworkCore
 @model EditModel
 @{
 }
 
-<div class="row">
+<div class="row" permission="@BlogPermissions.EditArticles">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">

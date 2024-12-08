@@ -1,5 +1,7 @@
 using DiscountManagement.Application.Contract.CustomerDiscount;
+using DiscountManagement.infrastructure.Configuration.Permissions;
 using Framework.Application;
+using Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,13 +25,15 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscount
             _customerDiscountApplication = customerDiscountApplication;
         }
 
+        [NeedsPermission(DiscountPermissions.ListCustomerDiscount)]
         public void OnGet(CustomerDiscountSearchModel searchModel)
         {
             Products = new SelectList(_productApplication.GetProducts(), "Id", "Name");
             CustomerDiscount = _customerDiscountApplication.Search(searchModel);
         }
 
-        public IActionResult OnGetCreate()
+        [NeedsPermission(DiscountPermissions.CreateCustomerDiscount)]
+        public IActionResult OnGetCreate()        
         {
             var command = new DefineCustomerDiscount
             {
@@ -39,12 +43,14 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscount
             return Partial("./Create", command);
         }
 
+        [NeedsPermission(DiscountPermissions.CreateCustomerDiscount)]
         public IActionResult OnPostCreate(DefineCustomerDiscount command)
         {
             var result = _customerDiscountApplication.Define(command);
             return new JsonResult(result);
         }
 
+        [NeedsPermission(DiscountPermissions.EditCustomerDiscount)]
         public IActionResult OnGetEdit(long id)
         {
             var customerDiscount = _customerDiscountApplication.GetDetails(id);
@@ -52,6 +58,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscount
             return Partial("./Edit", customerDiscount);
         }
 
+        [NeedsPermission(DiscountPermissions.EditCustomerDiscount)]
         public JsonResult OnPostEdit(EditCustomerDiscount command)
         {
             var result = _customerDiscountApplication.Edit(command);

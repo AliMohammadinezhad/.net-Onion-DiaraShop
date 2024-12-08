@@ -23,13 +23,15 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <select asp-for="Command.Permissions"
-                                        asp-items="Model.Permissions"
-                                        class="multi-select"
-                                        multiple="multiple"
-                                        id="my_multi_select3">
+                                <label class="control-label col-md-3">انتخاب دسترسی ها</label>
+                                <div class="col-md-12 wide">
+                                    <select asp-for="Command.Permissions"
+                                            asp-items="Model.Permissions"
+                                            multiple="multiple"
+                                            id="my_multi_select3">
 
-                                </select>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -56,7 +58,7 @@
 
     <script>
         jQuery(document).ready(function() {
-            $('#my_multi_select3').multiSelect({
+            window.$('#my_multi_select3').multiSelect({
                 selectableOptgroup: true,
                 selectableHeader:
                     "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",

@@ -1,11 +1,12 @@
 ﻿@page
+@using BlogManagement.Infrastructure.Configuration.Permissions
 @model CreateModel
 @{
     Layout = "_AdminLayout";
     ViewData["title"] = "ایجاد مقاله جدید";
 }
 
-<div class="row">
+<div class="row" permission="@BlogPermissions.CreateArticle">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">

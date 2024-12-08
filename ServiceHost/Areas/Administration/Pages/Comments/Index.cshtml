@@ -1,4 +1,5 @@
 ﻿@page
+@using DiscountManagement.infrastructure.Configuration.Permissions
 @model IndexModel
 @{
 }
@@ -13,7 +14,7 @@
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
     </div>
 </div>
-<div class="row">
+<div class="row" permission="@CommentPermissions.SearchComments">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -37,7 +38,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" permission="@CommentPermissions.ListComments">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -88,12 +89,14 @@
                                             <a asp-page="./Index"
                                                asp-page-handler="Cancel"
                                                asp-route-id="@item.Id"
+                                               permission="@CommentPermissions.CancelComment"
                                                class="btn btn-danger btn-custom waves-effect waves-light m-b-5 ">کنسل</a>
                                             @if (!item.IsConfirmed)
                                             {
                                                 <a asp-page="./Index"
                                                    asp-page-handler="Confirm"
                                                    asp-route-id="@item.Id"
+                                                   permission="@CommentPermissions.ConfirmComment"
                                                    class="btn btn-success waves-effect waves-light m-b-5 ">تایید</a>
                                             }
                                         </td>

@@ -1,4 +1,6 @@
 ﻿@page
+@using DiscountManagement.infrastructure.Configuration.Permissions
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscount.IndexModel
 @{
 }
@@ -12,12 +14,13 @@
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">تعریف تخفیف مشتری</a>
+            <a class="btn btn-success btn-lg" permission="@DiscountPermissions.CreateCustomerDiscount"
+               href="#showmodal=@Url.Page("./Index", "Create")">تعریف تخفیف مشتری</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div class="row" permission="@DiscountPermissions.SearchCustomerDiscount">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -49,7 +52,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div class="row" id="ProductCategoriesDiv" permission="@DiscountPermissions.ListCustomerDiscount">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -85,7 +88,7 @@
                                     <td>@item.Reason</td>
                                     <td>@item.CreationDate</td>
                                     <td>
-                                        <a class="btn btn-warning m-b-5 "
+                                            <a class="btn btn-warning m-b-5 " permission="@DiscountPermissions.EditCustomerDiscount"
                                            href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
                                             <i class="fa fa-edit"></i> ویرایش
                                         </a>

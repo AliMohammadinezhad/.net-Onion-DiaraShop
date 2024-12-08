@@ -1,5 +1,5 @@
 ﻿using Framework.Infrastructure;
-
+using static InventoryManagement.Infrastructure.Configuration.Permissions.InventoryPermissions;
 namespace InventoryManagement.Infrastructure.Configuration.Permissions;
 
 public class InventoryPermissionExposer : IPermissionExposer
@@ -9,13 +9,16 @@ public class InventoryPermissionExposer : IPermissionExposer
         return new Dictionary<string, List<PermissionDTO>>
         {
             {
-                "Inventory", [
-                    new PermissionDTO(50, "ListInventory"),
-                    new PermissionDTO(51, "SearchInventory"),
-                    new PermissionDTO(52, "CreateInventory"),
-                    new PermissionDTO(53, "EditInventory")
-                ]
-            }
+            "Inventory", [
+                new PermissionDTO(ListInventory, "لیست انبار"),
+                new PermissionDTO(SearchInventory, "جست و جوی انبار"),
+                new PermissionDTO(CreateInventory, "ایجاد انبار"),
+                new PermissionDTO(EditInventory, "ویرایش انبار"),
+                new PermissionDTO(IncreaseInventory, "افزایش موجودی انبار"),
+                new PermissionDTO(DecreaseInventory, "کاهش موجودی انبار"),
+                new PermissionDTO(OperationLogInventory, "گزارش انبار"),
+            ]
+        }
         };
     }
 }

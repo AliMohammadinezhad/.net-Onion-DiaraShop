@@ -1,9 +1,11 @@
 using Framework.Application;
+using Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Contracts.Product;
 using ShopManagement.Contracts.ProductPicture;
+using ShopManagement.infrastructure.Configuration.Permissions;
 
 namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures;
     public class IndexModel : PageModel
@@ -22,7 +24,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.ProductPictures;
             _productApplication = productApplication;
         }
 
-
+        [NeedsPermission(ShopPermissions.ListProductPictures)]
         public void OnGet(ProductPictureSearchModel searchModel)
         {
             Products = new SelectList(_productApplication.GetProducts(), "Id", "Name");

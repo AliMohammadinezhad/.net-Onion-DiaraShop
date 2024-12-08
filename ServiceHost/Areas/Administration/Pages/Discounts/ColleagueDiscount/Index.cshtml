@@ -1,4 +1,5 @@
 ﻿@page
+@using DiscountManagement.infrastructure.Configuration.Permissions
 @model ServiceHost.Areas.Administration.Pages.Discounts.ColleagueDiscount.IndexModel
 @{
 }
@@ -12,12 +13,13 @@
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">تعریف تخفیف همکاری</a>
+            <a class="btn btn-success btn-lg" permission="@DiscountPermissions.CreateColleagueDiscount"
+               href="#showmodal=@Url.Page("./Index", "Create")">تعریف تخفیف همکاری</a>
         </p>
     </div>
 </div>
 
-<div class="row">
+<div class="row" permission="@DiscountPermissions.SearchColleagueDiscount">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -41,7 +43,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div class="row" id="ProductCategoriesDiv" permission="@DiscountPermissions.ListColleagueDiscount">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -52,46 +54,48 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <table id="datatable" class="table table-striped table-bordered">
                             <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>محصول</th>
-                                <th>درصد تخفیف</th>
-                                <th>تاریخ تولید</th>
-                                <th>عملیات</th>
-                            </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>محصول</th>
+                                    <th>درصد تخفیف</th>
+                                    <th>تاریخ تولید</th>
+                                    <th>عملیات</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach (var item in Model.ColleagueDiscount)
-                            {
-                                <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.Product</td>
-                                    <td>
-                                        @item.DiscountRate
-                                    </td>
-                                    <td>@item.CreationDate</td>
-                                    <td>
-                                        <a class="btn btn-warning m-b-5 "
-                                           href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
-                                            <i class="fa fa-edit"></i> ویرایش
-                                        </a>
-                                        @if (item.IsRemoved)
-                                        {
-                                            <a asp-page="./Index"
-                                               asp-page-handler="Restore"
-                                               asp-route-id="@item.Id"
-                                               class="btn btn-success btn-custom waves-effect waves-light m-b-5 ">فعال سازی!</a>
-                                        }
-                                        else
-                                        {
-                                            <a asp-page="./Index"
-                                               asp-page-handler="Remove"
-                                               asp-route-id="@item.Id"
-                                               class="btn btn-danger btn-custom waves-effect waves-light m-b-5">غیر فعال سازی!</a>
-                                        }
-                                    </td>
-                                </tr>
-                            }
+                                @foreach (var item in Model.ColleagueDiscount)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.Product</td>
+                                        <td>
+                                            @item.DiscountRate
+                                        </td>
+                                        <td>@item.CreationDate</td>
+                                        <td>
+                                            <a class="btn btn-warning m-b-5 " permission="@DiscountPermissions.EditColleagueDiscount"
+                                               href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
+                                                <i class="fa fa-edit"></i> ویرایش
+                                            </a>
+                                            @if (item.IsRemoved)
+                                            {
+                                                <a asp-page="./Index"
+                                                   asp-page-handler="Restore"
+                                                   asp-route-id="@item.Id"
+                                                   permission="@DiscountPermissions.RestoreColleagueDiscount"
+                                                   class="btn btn-success btn-custom waves-effect waves-light m-b-5 ">فعال سازی!</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-page="./Index"
+                                                   asp-page-handler="Remove"
+                                                   asp-route-id="@item.Id"
+                                                   permission="@DiscountPermissions.RemoveColleagueDiscount"
+                                                   class="btn btn-danger btn-custom waves-effect waves-light m-b-5">غیر فعال سازی!</a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

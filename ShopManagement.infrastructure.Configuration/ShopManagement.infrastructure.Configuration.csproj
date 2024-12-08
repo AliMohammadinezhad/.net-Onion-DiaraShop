@@ -18,8 +18,4 @@
     <ProjectReference Include="..\ShopManagement.Infrastructure.EfCore\ShopManagement.Infrastructure.EfCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Permissions\" />
-  </ItemGroup>
-
 </Project>

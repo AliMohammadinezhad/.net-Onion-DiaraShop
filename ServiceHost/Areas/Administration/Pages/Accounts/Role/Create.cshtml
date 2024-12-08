@@ -1,4 +1,5 @@
 ﻿@page
+@using AccountManagement.Infrastructure.Configuration.Permissions
 @model CreateModel
 @{
     Layout = "_AdminLayout";
@@ -6,7 +7,7 @@
 }
 
 
-<div class="panel panel-default">
+<div class="panel panel-default" permission="@AccountPermissions.CreateRole">
     <div class="panel-heading">
         <h3 class="panel-title">ایجاد نقش جدید</h3>
     </div>

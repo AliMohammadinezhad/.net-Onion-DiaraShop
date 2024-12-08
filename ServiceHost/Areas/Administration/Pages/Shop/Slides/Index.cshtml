@@ -1,4 +1,5 @@
 ﻿@page
+@using ShopManagement.infrastructure.Configuration.Permissions
 @model ServiceHost.Areas.Administration.Pages.Shop.Slides.IndexModel
 @{
 }
@@ -12,12 +13,13 @@
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
-            <a class="btn btn-success btn-lg" href="#showmodal=@Url.Page("./Index", "Create")">ایجاد عکس محصول جدید</a>
+            <a class="btn btn-success btn-lg" permission="@ShopPermissions.CreateSlides" 
+               href="#showmodal=@Url.Page("./Index", "Create")">ایجاد عکس محصول جدید</a>
         </p>
     </div>
 </div>
 
-<div class="row" >
+<div class="row" permission="@ShopPermissions.ListSlides">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -61,7 +63,7 @@
                                         </td>
                                         
                                         <td>
-                                            <a class="btn btn-warning m-b-5 "
+                                            <a class="btn btn-warning m-b-5 " permission="@ShopPermissions.EditSlides"
                                                href="#showmodal=@Url.Page("./Index", "Edit", new { id = item.Id })">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
@@ -70,6 +72,7 @@
                                                 <a asp-page="./Index"
                                                    asp-page-handler="Removed"
                                                    asp-route-id="@item.Id"
+                                                   permission="@ShopPermissions.RemoveSlides"
                                                    class="btn btn-danger btn-custom waves-effect waves-light m-b-5 ">حذف</a>
                                             }
                                             else
@@ -77,6 +80,7 @@
                                                 <a asp-page="./Index"
                                                    asp-page-handler="Restore"
                                                    asp-route-id="@item.Id"
+                                                   permission="@ShopPermissions.RestoreSlides"
                                                    class="btn btn-success btn-custom waves-effect waves-light m-b-5">فعال سازی!</a>
                                             }
                                         </td>

@@ -16,8 +16,4 @@
     <ProjectReference Include="..\InventoryManagement\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Permissions\" />
-  </ItemGroup>
-
 </Project>

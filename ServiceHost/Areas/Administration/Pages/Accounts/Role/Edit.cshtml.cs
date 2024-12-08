@@ -1,4 +1,5 @@
 using AccountManagement.Application.Contract.Role;
+using AccountManagement.Infrastructure.Configuration.Permissions;
 using Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,10 +9,11 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Role
 {
     public class EditModel : PageModel
     {
-        private readonly IRoleApplication _roleApplication;
         public EditRole Command { get; set; }
         public List<SelectListItem> Permissions { get; set; } = [];
+
         private readonly IEnumerable<IPermissionExposer> _exposers;
+        private readonly IRoleApplication _roleApplication;
         public EditModel(IRoleApplication roleApplication,
             IEnumerable<IPermissionExposer> exposers)
         {
@@ -19,16 +21,15 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Role
             _exposers = exposers;
         }
 
+        [NeedsPermission(AccountPermissions.EditRoles)]
         public void OnGet(long roleCreateId)
         {
             Command = _roleApplication.GetDetails(roleCreateId);
-            var permissions = new List<PermissionDTO>();
             foreach (var exposer in _exposers)
             {
                 var exposedPermission = exposer.Expose();
                 foreach (var (key, value) in exposedPermission)
                 {
-                    permissions.AddRange(value);
                     var group = new SelectListGroup
                     {
                         Name = key
@@ -48,6 +49,7 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Role
             }
         }
 
+        [NeedsPermission(AccountPermissions.EditRoles)]
         public IActionResult OnPost(EditRole command)
         {
             _roleApplication.Edit(command);

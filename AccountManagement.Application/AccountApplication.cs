@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using AccountManagement.Application.Contract.Account;
 using AccountManagement.Domain.AccountAgg;
+using AccountManagement.Domain.RoleAgg;
 using Framework.Application;
 using Framework.Domain;
 
@@ -9,15 +10,18 @@ namespace AccountManagement.Application
     public class AccountApplication : IAccountApplication
     {
         private readonly IAccountRepository _accountRepository;
+        private readonly IRoleRepository _roleRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IFileUploader _fileUploader;
         private readonly IAuthHelper _authHelper;
-        public AccountApplication(IAccountRepository accountRepository, IPasswordHasher passwordHasher, IFileUploader fileUploader, IAuthHelper authHelper)
+
+        public AccountApplication(IAccountRepository accountRepository, IPasswordHasher passwordHasher, IFileUploader fileUploader, IAuthHelper authHelper, IRoleRepository roleRepository)
         {
             _accountRepository = accountRepository;
             _passwordHasher = passwordHasher;
             _fileUploader = fileUploader;
             _authHelper = authHelper;
+            _roleRepository = roleRepository;
         }
 
         public OperationResult Register(RegisterAccount command)
@@ -86,7 +90,12 @@ namespace AccountManagement.Application
             if (!isVerified)
                 return operation.Failed(ApplicationMessages.WrongUserPass);
 
-            var authViewModel = new AuthViewModel(account.Id,account.RoleId, account.FullName, account.Username);
+            var permissions = _roleRepository
+                .Get(account.RoleId)
+                .Permissions
+                .Select(x => x.Code)
+                .ToList();
+            var authViewModel = new AuthViewModel(account.Id,account.RoleId, account.FullName, account.Username, permissions);
             _authHelper.SignIn(authViewModel);
             return operation.Succeeded();
         }

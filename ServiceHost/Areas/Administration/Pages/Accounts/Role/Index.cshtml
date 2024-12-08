@@ -1,11 +1,12 @@
 ﻿@page
+@using AccountManagement.Infrastructure.Configuration.Permissions
 @model Areas.Administration.Pages.Accounts.Role.IndexModel
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "مدیریت نقش ها";
 }
 
-<div class="row">
+<div class="row" permission="@AccountPermissions.CreateRole">
     <div class="col-sm-12">
         <h4 class="page-title pull-right">@ViewData["title"]</h4>
         <p class="pull-left">
@@ -14,7 +15,7 @@
     </div>
 </div>
 
-<div class="row" id="ProductCategoriesDiv">
+<div class="row" id="ProductCategoriesDiv" permission="@AccountPermissions.ListRoles">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -42,7 +43,8 @@
                                         <td>
                                             <a class="btn btn-warning m-b-5 "
                                                asp-page="./Edit"
-                                               asp-route-roleCreateId="@item.Id">
+                                               asp-route-roleCreateId="@item.Id"
+                                               permission="@AccountPermissions.EditRoles">
                                                 <i class="fa fa-edit"></i> ویرایش
                                             </a>
                                         </td>

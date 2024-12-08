@@ -1,9 +1,12 @@
 using Framework.Application;
+using Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ShopManagement.Contracts.Product;
 using ShopManagement.Contracts.ProductCategory;
+using ShopManagement.infrastructure.Configuration.Permissions;
 
 namespace ServiceHost.Areas.Administration.Pages.Shop.Products
 {
@@ -21,12 +24,14 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
             _categoryApplication = categoryApplication;
         }
 
+        [NeedsPermission(ShopPermissions.ListProducts)]
         public void OnGet(ProductSearchModel searchModel)
         {
             ProductCategories = new SelectList(_categoryApplication.GetProductCategories(), "Id", "Name");
             Products = _productApplication.Search(searchModel);
         }
 
+        [NeedsPermission(ShopPermissions.CreateProduct)]
         public IActionResult OnGetCreate()
         {
             var command = new CreateProduct
@@ -35,13 +40,15 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
             };
             return Partial("./Create", command);
         }
-
+        
+        [NeedsPermission(ShopPermissions.CreateProduct)]
         public IActionResult OnPostCreate(CreateProduct command)
         {
             var result = _productApplication.Create(command);
             return new JsonResult(result);
         }
 
+        [NeedsPermission(ShopPermissions.EditProducts)]
         public IActionResult OnGetEdit(long id)
         {
             var product = _productApplication.GetDetails(id);
@@ -49,6 +56,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
             return Partial("./Edit", product);
         }
 
+        [NeedsPermission(ShopPermissions.EditProducts)]
         public JsonResult OnPostEdit(EditProduct command)
         {
             var result = _productApplication.Edit(command);

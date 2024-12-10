@@ -1,6 +1,7 @@
 ﻿using Framework.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Query.Contracts;
 using Query.Contracts.Product;
 using Query.Contracts.ProductCategory;
 using Query.Contracts.Slide;
@@ -41,6 +42,7 @@ public class ShopManagementDependencyInjection
         services.AddTransient<ISlideQuery, SlideQuery>();
         services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
         services.AddTransient<IProductQuery, ProductQuery>();
+        services.AddTransient<ICartCalculatorService, CartCalculatorService>();
 
         services.AddTransient<IPermissionExposer, ShopPermissionExposer>();
 

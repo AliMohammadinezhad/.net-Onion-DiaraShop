@@ -1,6 +1,6 @@
 ﻿const cookieName = "cart-items";
 
-function addToCart(id, name, price, picture) {
+function addToCart(id, name, price, picture, slug) {
     let products = $.cookie(cookieName);
     if (products === undefined) {
         products = [];
@@ -18,9 +18,9 @@ function addToCart(id, name, price, picture) {
             name,
             unitPrice: price,
             picture,
+            slug,
             count
         }
-
         products.push(product);
     }
 

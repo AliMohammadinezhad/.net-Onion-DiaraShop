@@ -5,6 +5,7 @@ using InventoryManagement.Infrastructure.EfCore;
 using Microsoft.EntityFrameworkCore;
 using Query.Contracts.Comment;
 using Query.Contracts.Product;
+using ShopManagement.Contracts.Order;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Infrastructure.EfCore;
 
@@ -67,6 +68,7 @@ public class ProductQuery : IProductQuery
         {
             var price = productInventory.UnitPrice;
             product.Price = price.ToMoney();
+            product.DoublePrice = price;
             product.IsInStock = productInventory.InStock;
 
             var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
@@ -214,4 +216,20 @@ public class ProductQuery : IProductQuery
         return products;
     }
 
+    public List<CartItem> CheckInventoryStatus(List<CartItem> cartItems)
+    {
+        var inventory = _inventoryContext.Inventory
+            .ToList();
+        foreach (var item in cartItems)
+        {
+            if (inventory.Any(x => x.ProductId == item.Id && x.InStock))
+            {
+                var itemInventory = inventory.FirstOrDefault(x => x.ProductId == item.Id);
+                if (itemInventory == null) continue;
+                item.IsInStock = itemInventory.CalculateCurrentCount() >= item.Count;
+            }
+        }
+
+        return cartItems;
+    }
 }

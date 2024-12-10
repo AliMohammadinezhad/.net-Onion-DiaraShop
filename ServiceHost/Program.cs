@@ -8,6 +8,8 @@ using Framework.Application;
 using Framework.Infrastructure;
 using InventoryManagement.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Query.Contracts;
+using Query.Query;
 using ServiceHost;
 using ShopManagement.infrastructure.Configuration;
 
@@ -32,8 +34,8 @@ builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, Unico
 
 builder.Services.AddTransient<IAuthHelper, AuthHelper>();
 builder.Services.AddTransient<IFileUploader, FileUploader>();
-builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
 
 builder.Services.Configure<CookiePolicyOptions>(options =>

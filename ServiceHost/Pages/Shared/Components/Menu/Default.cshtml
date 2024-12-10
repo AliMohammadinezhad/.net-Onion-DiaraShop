@@ -1,4 +1,5 @@
 ﻿@using Framework.Application
+@using Framework.Infrastructure
 @model Query.MenuModel
 @inject IAuthHelper AuthHelper
 
@@ -50,7 +51,7 @@
                                     <a href="contact.html">تماس با ما</a>
                                 </li>
                                 
-                                @if (AuthHelper.CurrentAccountRole() == "1"|| AuthHelper.CurrentAccountRole() == "3")
+                                @if (AuthHelper.CurrentAccountRole() == Roles.Admin|| AuthHelper.CurrentAccountRole() == Roles.ContentCreator)
                                 {
                                     <li>
                                         <a class="text-primary" asp-area="Administration" asp-page="/Index">پنل ادمین</a>
@@ -76,7 +77,7 @@
                                         <div class="cart-items-wrapper ps-scroll" id="cart_items_wrapper">
                                         </div>
                                         <div class="cart-buttons">
-                                            <a href="cart.html">مشاهده سبد خرید</a>
+                                            <a asp-page="/Cart">مشاهده سبد خرید</a>
                                         </div>
                                     </div>
                                 </div>

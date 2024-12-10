@@ -64,7 +64,7 @@ body {
 
 .mini-cart .single-cart-item .content {
     padding-right: 10px;
-    padding-left: unset;
+    margin: 20px 0 0 0 ;
 }
 
 .mini-cart .single-cart-item .remove-icon {

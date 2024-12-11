@@ -7,10 +7,12 @@ using Query.Contracts.ProductCategory;
 using Query.Contracts.Slide;
 using Query.Query;
 using ShopManagement.Application;
+using ShopManagement.Contracts.Order;
 using ShopManagement.Contracts.Product;
 using ShopManagement.Contracts.ProductCategory;
 using ShopManagement.Contracts.ProductPicture;
 using ShopManagement.Contracts.Slide;
+using ShopManagement.Domain.OrderAgg;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
@@ -37,12 +39,15 @@ public class ShopManagementDependencyInjection
         services.AddTransient<ISlideApplication, SlideApplication>();
         services.AddTransient<ISlideRepository, SlideRepository>();
 
-
+        services.AddTransient<IOrderApplication, OrderApplication>();
+        services.AddTransient<IOrderRepository, OrderRepository>();
 
         services.AddTransient<ISlideQuery, SlideQuery>();
         services.AddTransient<IProductCategoryQuery, ProductCategoryQuery>();
         services.AddTransient<IProductQuery, ProductQuery>();
         services.AddTransient<ICartCalculatorService, CartCalculatorService>();
+
+        services.AddSingleton<ICartService, CartService>();
 
         services.AddTransient<IPermissionExposer, ShopPermissionExposer>();
 

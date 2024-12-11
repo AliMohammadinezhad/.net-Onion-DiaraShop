@@ -18,7 +18,7 @@ public class AuthHelper : IAuthHelper
 
     public bool IsAuthenticated()
     {
-        return _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
+        return _contextAccessor.HttpContext.User.Identity is { IsAuthenticated: true };
         //var claims = _contextAccessor.HttpContext.User.Claims.ToList();
         //return claims.Count > 0;
     }
@@ -52,7 +52,7 @@ public class AuthHelper : IAuthHelper
 
     public string CurrentAccountRole()
     {
-        return IsAuthenticated() ? _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value : null;
+        return (IsAuthenticated() ? _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value : null) ?? string.Empty;
     }
 
     public AuthViewModel CurrentAccountInfo()
@@ -82,6 +82,11 @@ public class AuthHelper : IAuthHelper
                    ??
                    throw new JsonException("Deserializing Failed");
         throw new NullReferenceException("permissions was null");
+    }
+
+    public long CurrentAccountId()
+    {
+        return IsAuthenticated() ? long.Parse(_contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value ?? "0") : 0;
     }
 
     public void SignOut()

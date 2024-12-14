@@ -56,7 +56,7 @@ namespace Framework.Application.ZarinPal
                 CallbackURL = $"{siteUrl}/Checkout?handler=CallBack&oId={orderId}",
                 Description = description,
                 Email = email,
-                Amount = finalAmount,
+                Amount = finalAmount * 10,
                 MerchantID = MerchantId
             };
             var jsonBody = JsonConvert.SerializeObject(body);
@@ -93,10 +93,7 @@ namespace Framework.Application.ZarinPal
             var jsonBody = JsonConvert.SerializeObject(body);
             request.AddJsonBody(jsonBody);
             var response = client.Execute(request);
-            if (!response.IsSuccessful)
-            {
-                throw new HttpRequestException($"Request failed with status code {response.StatusCode}: {response.Content}");
-            }
+            
             return JsonConvert.DeserializeObject<VerificationResponse>(response.Content);
         }
     }

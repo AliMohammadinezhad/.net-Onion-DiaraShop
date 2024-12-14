@@ -13,4 +13,13 @@ public class OrderRepository : RepositoryBase<long,Order>, IOrderRepository
     }
 
 
+    public double GetAmountBy(long id)
+    {
+        var order = _context.Orders
+            .Select(x => new { x.PayAmount, x.Id })
+            .FirstOrDefault(x => x.Id == id);
+        if(order != null)
+            return order.PayAmount;
+        return 0;
+    }
 }

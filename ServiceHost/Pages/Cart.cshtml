@@ -1,6 +1,8 @@
 ﻿@page
 @using Framework.Application
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.IdentityModel.Tokens
+@using ShopManagement.Contracts.Order
 @model ServiceHost.Pages.CartModel
 @{
     ViewData["Title"] = "سبد خرید";
@@ -42,8 +44,10 @@
                             </div>
                         }
                     </div>
-
+                    
                     <div class="page-content-wrapper">
+                        @if (!Model.CartItems.IsNullOrEmpty())
+                        {
                         <div class="cart-table table-responsive">
                             <table class="table">
                                 <thead>
@@ -98,6 +102,13 @@
                                 </div>
                             </div>
                         </div>
+                        }
+                        else
+                        {
+                            <p class="text-center text-danger">
+                                سبد خرید خالی است!
+                            </p>
+                        }
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ public class OrderMapping : IEntityTypeConfiguration<Order>
         builder.ToTable("Orders");
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.IssueTrackingNumber).HasMaxLength(8).IsRequired(true);
+        builder.Property(x => x.IssueTrackingNumber).HasMaxLength(8).IsRequired(false);
         builder.OwnsMany(x => x.Items, navigationBuilder =>
         {
             navigationBuilder.ToTable("OrderItems");

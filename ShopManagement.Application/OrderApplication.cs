@@ -34,7 +34,7 @@ public class OrderApplication : IOrderApplication
         return order.Id;
     }
 
-    public void PaymentSucceeded(long orderId, long refId)
+    public string PaymentSucceeded(long orderId, long refId)
     {
         var order = _orderRepository.Get(orderId);
         order.PaymentSucceeded(refId);
@@ -43,5 +43,11 @@ public class OrderApplication : IOrderApplication
         order.SetIssueTrackingNumber(issueTrackingNumber);
         // Reduce OrderItems from Inventory
         _orderRepository.SaveChanges();
+        return issueTrackingNumber;
+    }
+
+    public double GetAmountBy(long id)
+    {
+        return _orderRepository.GetAmountBy(id);
     }
 }

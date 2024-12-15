@@ -5,6 +5,7 @@ namespace ShopManagement.Domain.OrderAgg;
 public class Order : EntityBase
 {
     public long AccountId { get; private set; }
+    public int PaymentMethod { get; private set; }
     public double TotalPrice { get; private set; }
     public double DiscountAmount { get; private set; }
     public double PayAmount { get; private set; }
@@ -14,9 +15,10 @@ public class Order : EntityBase
     public long RefId { get; private set; }
     public List<OrderItem> Items { get; private set; }
 
-    public Order(long accountId, double totalPrice, double discountAmount, double payAmount)
+    public Order(long accountId,int paymentMethod, double totalPrice, double discountAmount, double payAmount)
     {
         AccountId = accountId;
+        PaymentMethod = paymentMethod;
         TotalPrice = totalPrice;
         DiscountAmount = discountAmount;
         PayAmount = payAmount;

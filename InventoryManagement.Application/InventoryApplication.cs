@@ -7,10 +7,11 @@ namespace InventoryManagement.Application
     public class InventoryApplication : IInventoryApplication
     {
         private readonly IInventoryRepository _repository;
-
-        public InventoryApplication(IInventoryRepository repository)
+        private readonly IAuthHelper _authHelper;
+        public InventoryApplication(IInventoryRepository repository, IAuthHelper authHelper)
         {
             _repository = repository;
+            _authHelper = authHelper;
         }
 
         public OperationResult Create(CreateInventory command)
@@ -48,7 +49,7 @@ namespace InventoryManagement.Application
             if (inventory == null)
                 return operation.Failed(ApplicationMessages.RecordNotFound);
 
-            const long operatorId = 1; // TODO: add accounting system 
+            var operatorId = _authHelper.CurrentAccountId();
             inventory.Increase(command.Count, operatorId, command.Description);
             _repository.SaveChanges();
             return operation.Succeeded();
@@ -61,7 +62,7 @@ namespace InventoryManagement.Application
             if (inventory == null)
                 return operation.Failed(ApplicationMessages.RecordNotFound);
 
-            const long operatorId = 1; // TODO: add accounting system 
+            var operatorId = _authHelper.CurrentAccountId();
             inventory.Decrease(command.Count, operatorId, command.Description, command.OrderId);
             _repository.SaveChanges();
             return operation.Succeeded();
@@ -70,7 +71,7 @@ namespace InventoryManagement.Application
         public OperationResult Decrease(List<DecreaseInventory> command)
         {
             var operation = new OperationResult();
-            const long operatorId = 1;
+            var operatorId = _authHelper.CurrentAccountId();
             foreach (var item in command)
             {
                 var inventory = _repository.GetBy(item.ProductId);

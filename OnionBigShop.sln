@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SM.Infrastructure", "SM.Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Infrastructure.EfCore", "ShopManagement.Infrastructure.EfCore\ShopManagement.Infrastructure.EfCore.csproj", "{668FBCA2-3E51-47F5-B305-5A9CC69A5949}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.infrastructure.Configuration", "ShopManagement.infrastructure.Configuration\ShopManagement.infrastructure.Configuration.csproj", "{8896C8B0-34CB-451A-B027-EE8B04C24EAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopManagement.Infrastructure.Configuration", "ShopManagement.infrastructure.Configuration\ShopManagement.Infrastructure.Configuration.csproj", "{8896C8B0-34CB-451A-B027-EE8B04C24EAF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHost", "ServiceHost\ServiceHost.csproj", "{BB89018A-3EC7-443D-ACD0-9E13689E45AE}"
 EndProject
@@ -116,6 +116,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManagement.Application", "AccountManagement.Application\AccountManagement.Application.csproj", "{59A9FC57-C2B3-46BE-99ED-8B3274EB19EC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManagement.Infrastructure.Configuration", "AccountManagement.Infrastructure.DependencyInjection\AccountManagement.Infrastructure.Configuration.csproj", "{B9372ACB-0A2E-41C1-BBD3-C0D3DACFCF46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Infrastructure.InventoryAcl", "ShopManagement.Infrastructure.InventoryAcl\ShopManagement.Infrastructure.InventoryAcl.csproj", "{6270EC66-AFBF-41E6-A1B5-CACC290E0329}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -255,6 +257,10 @@ Global
 		{B9372ACB-0A2E-41C1-BBD3-C0D3DACFCF46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9372ACB-0A2E-41C1-BBD3-C0D3DACFCF46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9372ACB-0A2E-41C1-BBD3-C0D3DACFCF46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6270EC66-AFBF-41E6-A1B5-CACC290E0329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6270EC66-AFBF-41E6-A1B5-CACC290E0329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6270EC66-AFBF-41E6-A1B5-CACC290E0329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6270EC66-AFBF-41E6-A1B5-CACC290E0329}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -308,6 +314,7 @@ Global
 		{57A2B6E4-AB04-4976-BBE1-B752A9675CB8} = {8D4A1872-0A4A-43C3-9983-362EA558764C}
 		{59A9FC57-C2B3-46BE-99ED-8B3274EB19EC} = {D13216AB-85A8-4871-A577-97F0E13FBF1B}
 		{B9372ACB-0A2E-41C1-BBD3-C0D3DACFCF46} = {8D4A1872-0A4A-43C3-9983-362EA558764C}
+		{6270EC66-AFBF-41E6-A1B5-CACC290E0329} = {78267DB9-AB25-4C80-B676-2F8D6CFE44A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4348554-1CA7-4F93-A74A-E93BD864DE42}

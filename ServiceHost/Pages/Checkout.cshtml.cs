@@ -55,26 +55,38 @@ namespace ServiceHost.Pages
             _cartService.Set(Cart);
         }
 
-        public IActionResult OnGetPay()
+        public IActionResult OnPostPay(int paymentMethod)
         {
             var cart = _cartService.Get();
+            cart.SetPaymentMethod(paymentMethod);
             var result = _productQuery.CheckInventoryStatus(cart.CartItems);
 
             if (result.Any(x => !x.IsInStock))
                 return RedirectToPage("./Cart");
 
             var orderId = _orderApplication.PlaceOrder(cart);
-            var account = _authHelper.CurrentAccountInfo();
+            if (paymentMethod == 1)
+            {
 
-            var paymentResponse = _zarinPalFactory.CreatePaymentRequest(
-                cart.PayAmount.ToString(),
-                "",
-                "",
-                "خرید تستی",
-                orderId
+
+                var account = _authHelper.CurrentAccountInfo();
+
+                var paymentResponse = _zarinPalFactory.CreatePaymentRequest(
+                    cart.PayAmount.ToString(),
+                    "",
+                    "",
+                    "خرید تستی",
+                    orderId
                 );
 
-            return Redirect($"https://{_zarinPalFactory.Prefix}.zarinpal.com/pg/StartPay/{paymentResponse.Data.Authority}");
+                return Redirect(
+                    $"https://{_zarinPalFactory.Prefix}.zarinpal.com/pg/StartPay/{paymentResponse.Data.Authority}");
+            }
+            else
+            {
+                var paymentResult = new PaymentResult();
+                return RedirectToPage("/PaymentResult", paymentResult.Succeeded("سفارش شما با موفقیت ثبت شد. پس از تماس کارشناسان ما و پرداخت وجه، سفارش شما ارسال خواهد شد.",null));
+            }
         }
 
         public IActionResult OnGetCallback(

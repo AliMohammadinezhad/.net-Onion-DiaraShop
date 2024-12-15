@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using ShopManagement.Contracts.Order;
 using ShopManagement.Domain.OrderAgg;
+using ShopManagement.Domain.Services;
 
 namespace ShopManagement.Application;
 
@@ -10,18 +11,20 @@ public class OrderApplication : IOrderApplication
     private readonly IOrderRepository _orderRepository;
     private readonly IConfiguration _configuration;
     private readonly IAuthHelper _authHelper;
+    private readonly IShopInventoryAcl _shopInventoryAcl;
 
-    public OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IConfiguration configuration)
+    public OrderApplication(IOrderRepository orderRepository, IAuthHelper authHelper, IConfiguration configuration, IShopInventoryAcl shopInventoryAcl)
     {
         _orderRepository = orderRepository;
         _authHelper = authHelper;
         _configuration = configuration;
+        _shopInventoryAcl = shopInventoryAcl;
     }
 
     public long PlaceOrder(Cart cart)
     {
         var currentAccountId = _authHelper.CurrentAccountId();
-        var order = new Order(currentAccountId, cart.TotalAmount, cart.DiscountAmount, cart.PayAmount);
+        var order = new Order(currentAccountId, cart.PaymentMethod, cart.TotalAmount, cart.DiscountAmount, cart.PayAmount);
 
         foreach (var item in cart.CartItems)
         {
@@ -41,9 +44,13 @@ public class OrderApplication : IOrderApplication
         var symbol = _configuration.GetSection("Symbol").Value;
         var issueTrackingNumber = CodeGenerator.Generate(symbol);
         order.SetIssueTrackingNumber(issueTrackingNumber);
-        // Reduce OrderItems from Inventory
-        _orderRepository.SaveChanges();
-        return issueTrackingNumber;
+        if (_shopInventoryAcl.DecreaseFromInventory(order.Items))
+        {
+            _orderRepository.SaveChanges();
+            return issueTrackingNumber;
+        }
+
+        return null;
     }
 
     public double GetAmountBy(long id)

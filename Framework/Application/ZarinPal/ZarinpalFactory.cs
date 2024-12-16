@@ -86,7 +86,7 @@ namespace Framework.Application.ZarinPal
 
             var body = new VerificationRequest
             {
-                Amount = finalAmount,
+                Amount = finalAmount * 10,
                 MerchantID = MerchantId,
                 Authority = authority
             };

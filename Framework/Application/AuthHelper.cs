@@ -86,7 +86,9 @@ public class AuthHelper : IAuthHelper
 
     public long CurrentAccountId()
     {
-        return IsAuthenticated() ? long.Parse(_contextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value ?? "0") : 0;
+        return IsAuthenticated()
+            ? long.Parse(_contextAccessor.HttpContext.User.Claims.First(x => x.Type == "AccountId")?.Value)
+            : 0;
     }
 
     public void SignOut()

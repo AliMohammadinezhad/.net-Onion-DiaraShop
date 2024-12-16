@@ -2,6 +2,13 @@
 
 public static class ShopPermissions
 {
+    // Orders
+    public const int ListOrders = 1;
+    public const int SearchOrders = 2;
+    public const int ConfirmOrder = 3;
+    public const int CancelOrder = 4;
+    public const int ItemsOrder = 5;
+
     // Products
     public const int ListProducts = 10;
     public const int SearchProducts = 11;

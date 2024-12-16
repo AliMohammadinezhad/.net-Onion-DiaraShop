@@ -27,8 +27,8 @@ public class PaymentMethod
     }
 
 
-    public PaymentMethod GetBy(long id)
+    public static PaymentMethod GetBy(long id)
     {
-        return GetList().Find(x => x.Id == id);
+        return GetList().FirstOrDefault(x => x.Id == id);
     }
 }

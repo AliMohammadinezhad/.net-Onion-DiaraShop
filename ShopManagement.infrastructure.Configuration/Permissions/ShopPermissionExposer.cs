@@ -41,7 +41,16 @@ public class ShopPermissionExposer : IPermissionExposer
                     new PermissionDTO(RemoveSlides, "حذف اسلاید"),
                     new PermissionDTO(RestoreSlides, "بازیابی اسلاید"),
                 ]
-            }
+            },
+            {
+                "Orders", [
+                    new PermissionDTO(ListOrders, "لیست سفارشات"),
+                    new PermissionDTO(SearchOrders, "جست و جوی سفارش"),
+                    new PermissionDTO(ConfirmOrder, "تایید سفارش"),
+                    new PermissionDTO(CancelOrder, "لغو سفارش"),
+                    new PermissionDTO(ItemsOrder, "اقلام سفارش"),
+                ]
+            },
         };
     }
 }

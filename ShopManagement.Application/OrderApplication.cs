@@ -57,4 +57,21 @@ public class OrderApplication : IOrderApplication
     {
         return _orderRepository.GetAmountBy(id);
     }
+
+    public void Cancel(long id)
+    {
+        var order = _orderRepository.Get(id);
+        order.Cancel();
+        _orderRepository.SaveChanges();
+    }
+
+    public List<OrderItemViewModel> GetItems(long orderId)
+    {
+        return _orderRepository.GetItems(orderId);
+    }
+
+    public List<OrderViewModel> Search(OrderSearchModel searchModel)
+    {
+        return _orderRepository.Search(searchModel);
+    }
 }

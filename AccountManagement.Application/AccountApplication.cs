@@ -1,9 +1,7 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using AccountManagement.Application.Contract.Account;
+﻿using AccountManagement.Application.Contract.Account;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
 using Framework.Application;
-using Framework.Domain;
 
 namespace AccountManagement.Application
 {
@@ -95,7 +93,7 @@ namespace AccountManagement.Application
                 .Permissions
                 .Select(x => x.Code)
                 .ToList();
-            var authViewModel = new AuthViewModel(account.Id,account.RoleId, account.FullName, account.Username, permissions);
+            var authViewModel = new AuthViewModel(account.Id, account.RoleId, account.FullName, account.Username, permissions);
             _authHelper.SignIn(authViewModel);
             return operation.Succeeded();
         }

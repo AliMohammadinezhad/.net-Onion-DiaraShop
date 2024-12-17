@@ -1,6 +1,4 @@
-﻿using Framework.Infrastructure;
-
-namespace AccountManagement.Application.Contract.Role;
+﻿namespace AccountManagement.Application.Contract.Role;
 
 public class CreateRole
 {

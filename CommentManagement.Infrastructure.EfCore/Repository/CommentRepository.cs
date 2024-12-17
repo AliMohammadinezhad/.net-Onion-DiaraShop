@@ -18,24 +18,24 @@ public class CommentRepository : RepositoryBase<long, Comment>, ICommentReposito
     {
         var query = _context.Comments
             .Select(x => new CommentViewModel
-        {
-            Id = x.Id,
-            Name = x.Name,
-            Email = x.Email,
-            Website = x.Website,
-            Message = x.Message,
-            IsCancelled = x.IsCancelled,
-            IsConfirmed = x.IsConfirmed,
-            OwnerRecordId = x.OwnerRecordId,
-            CommentDate = x.CreationDate.ToFarsi()
-        });
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Email = x.Email,
+                Website = x.Website,
+                Message = x.Message,
+                IsCancelled = x.IsCancelled,
+                IsConfirmed = x.IsConfirmed,
+                OwnerRecordId = x.OwnerRecordId,
+                CommentDate = x.CreationDate.ToFarsi()
+            });
 
         if (!string.IsNullOrWhiteSpace(searchModel.Name))
             query = query.Where(x => x.Name.Contains(searchModel.Name));
-        
+
         if (!string.IsNullOrWhiteSpace(searchModel.Email))
             query = query.Where(x => x.Email.Contains(searchModel.Email));
-        
+
         return query.OrderByDescending(x => x.Id).ToList();
     }
 }

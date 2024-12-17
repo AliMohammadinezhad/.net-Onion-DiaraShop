@@ -1,4 +1,3 @@
-using AccountManagement.Infrastructure.Configuration;
 using Framework.Infrastructure;
 using InventoryManagement.Application.Contract.Inventory;
 using InventoryManagement.Infrastructure.Configuration.Permissions;
@@ -7,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Contracts.Product;
-using ShopManagement.infrastructure.Configuration.Permissions;
 
 namespace ServiceHost.Areas.Administration.Pages.Inventory
 {

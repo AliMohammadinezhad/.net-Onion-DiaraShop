@@ -22,7 +22,7 @@ public class CartCalculatorService : ICartCalculatorService
         var cart = new Cart();
         var colleagueDiscounts = _discountContext.ColleagueDiscounts
             .Where(x => !x.IsRemoved)
-            .Select(x => new {x.DiscountRate, x.ProductId})
+            .Select(x => new { x.DiscountRate, x.ProductId })
             .ToList();
 
         var customerDiscounts = _discountContext.CustomerDiscounts
@@ -38,13 +38,13 @@ public class CartCalculatorService : ICartCalculatorService
             if (currentAccountRole == Roles.Colleague)
             {
                 var colleagueDiscount = colleagueDiscounts.FirstOrDefault(x => x.ProductId == cartItem.Id);
-                if (colleagueDiscount != null) 
+                if (colleagueDiscount != null)
                     cartItem.DiscountRate = colleagueDiscount.DiscountRate;
             }
             else
             {
                 var customerDiscount = customerDiscounts.FirstOrDefault(x => x.ProductId == cartItem.Id);
-                if (customerDiscount != null) 
+                if (customerDiscount != null)
                     cartItem.DiscountRate = customerDiscount.DiscountRate;
             }
 

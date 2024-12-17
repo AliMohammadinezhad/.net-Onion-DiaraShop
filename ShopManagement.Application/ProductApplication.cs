@@ -2,7 +2,6 @@
 using ShopManagement.Contracts.Product;
 using ShopManagement.Domain.ProductAgg;
 using ShopManagement.Domain.ProductCategoryAgg;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ShopManagement.Application;
 
@@ -28,7 +27,7 @@ public class ProductApplication : IProductApplication
         var categorySlug = _categoryRepository.GetCategorySlugById(command.CategoryId);
         var path = $"{categorySlug}/{slug}";
         var picturePath = _fileUploader.Upload(command.Picture, path);
-        var product = new Product(command.Name, command.Code,  command.ShortDescription,
+        var product = new Product(command.Name, command.Code, command.ShortDescription,
             command.Description, picturePath, command.PictureAlt, command.PictureTitle, slug, command.Keyword,
             command.MetaDescription, command.CategoryId);
         _repository.Create(product);
@@ -50,7 +49,7 @@ public class ProductApplication : IProductApplication
         var slug = command.Slug.Slugify();
         var path = $"{product.Category.Slug}/{slug}";
         var picturePath = _fileUploader.Upload(command.Picture, path);
-        product.Edit(command.Name, command.Code,  command.ShortDescription,
+        product.Edit(command.Name, command.Code, command.ShortDescription,
             command.Description, picturePath, command.PictureAlt, command.PictureTitle, slug,
             command.Keyword,
             command.MetaDescription, command.CategoryId);

@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using AccountManagement.Application.Contract.Role;
+﻿using AccountManagement.Application.Contract.Role;
 using AccountManagement.Domain.RoleAgg;
 using Framework.Application;
 

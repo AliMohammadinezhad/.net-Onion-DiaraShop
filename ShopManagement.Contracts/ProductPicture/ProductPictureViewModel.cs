@@ -1,7 +1,4 @@
-﻿using Framework.Application;
-using Microsoft.AspNetCore.Http;
-
-namespace ShopManagement.Contracts.ProductPicture;
+﻿namespace ShopManagement.Contracts.ProductPicture;
 
 public class ProductPictureViewModel
 {

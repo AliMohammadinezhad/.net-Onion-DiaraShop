@@ -1,5 +1,4 @@
-﻿using Framework.Application;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Nancy.Json;
 using Query.Contracts.Product;
@@ -26,7 +25,7 @@ namespace ServiceHost.Pages
             var value = Request.Cookies[CookieName];
             if (value == null) return;
             var cartItems = serializer.Deserialize<List<CartItem>>(value);
-            foreach (var item in cartItems) 
+            foreach (var item in cartItems)
                 item.TotalItemPrice = item.Count * item.UnitPrice;
 
             CartItems = _productQuery.CheckInventoryStatus(cartItems);
@@ -40,8 +39,8 @@ namespace ServiceHost.Pages
             List<CartItem> cartItems = serializer.Deserialize<List<CartItem>>(value);
             CartItem itemToRemove = cartItems.FirstOrDefault(x => x.Id == cartItemId) ?? throw new NullReferenceException();
             cartItems.Remove(itemToRemove);
-            var options = new CookieOptions 
-            { 
+            var options = new CookieOptions
+            {
                 Expires = DateTimeOffset.Now.AddDays(2),
                 IsEssential = true,
                 Domain = "localhost",

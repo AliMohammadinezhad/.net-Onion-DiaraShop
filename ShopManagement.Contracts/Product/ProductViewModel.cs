@@ -1,7 +1,4 @@
-﻿using Framework.Application;
-using Microsoft.AspNetCore.Http;
-
-namespace ShopManagement.Contracts.Product;
+﻿namespace ShopManagement.Contracts.Product;
 
 public class ProductViewModel
 {

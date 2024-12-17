@@ -18,9 +18,9 @@ public class SlideApplication : ISlideApplication
     {
         var operation = new OperationResult();
         var slidePath = _fileUploader.Upload(command.Picture, "slides");
-        var slide = new Slide(slidePath,command.Link,command.PictureAlt,command.PictureTitle, command.Heading,
+        var slide = new Slide(slidePath, command.Link, command.PictureAlt, command.PictureTitle, command.Heading,
             command.Title, command.Text, command.BtnText);
-        
+
         _repository.Create(slide);
         _repository.SaveChanges();
         return operation.Succeeded();

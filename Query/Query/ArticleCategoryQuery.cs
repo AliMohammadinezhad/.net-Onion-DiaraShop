@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using BlogManagement.Domain.ArticleAgg;
+﻿using BlogManagement.Domain.ArticleAgg;
 using BlogManagement.Infrastructure.EfCore;
 using Framework.Application;
 using Microsoft.EntityFrameworkCore;
@@ -22,26 +21,26 @@ public class ArticleCategoryQuery : IArticleCategoryQuery
         var articleCategory = _context.ArticleCategories
             .Include(x => x.Articles)
             .Select(x => new ArticleCategoryQueryModel
-        {
-            Slug = x.Slug,
-            Name = x.Name,
-            Description = x.Description,
-            Picture = x.Picture,
-            PictureAlt = x.PictureAlt,
-            PictureTitle = x.PictureTitle,
-            Keywords = x.Keywords,
-            MetaDescription = x.MetaDescription,
-            CanonicalAddress = x.CanonicalAddress,
-            Articles = MapArticles(x.Articles),
-            ArticleCount = x.Articles.Count,
-            Id = x.Id,
-            ShowOrder = x.ShowOrder,
+            {
+                Slug = x.Slug,
+                Name = x.Name,
+                Description = x.Description,
+                Picture = x.Picture,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle,
+                Keywords = x.Keywords,
+                MetaDescription = x.MetaDescription,
+                CanonicalAddress = x.CanonicalAddress,
+                Articles = MapArticles(x.Articles),
+                ArticleCount = x.Articles.Count,
+                Id = x.Id,
+                ShowOrder = x.ShowOrder,
 
-        }).FirstOrDefault(x => x.Slug == slug);
+            }).FirstOrDefault(x => x.Slug == slug);
 
-        if(!string.IsNullOrWhiteSpace(articleCategory?.Keywords))
+        if (!string.IsNullOrWhiteSpace(articleCategory?.Keywords))
             articleCategory.KeywordList = articleCategory.Keywords.Split("،").ToList();
-        
+
         return articleCategory;
     }
 

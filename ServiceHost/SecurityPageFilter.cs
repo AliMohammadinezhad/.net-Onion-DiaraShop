@@ -1,7 +1,7 @@
-﻿using Framework.Infrastructure;
+﻿using Framework.Application;
+using Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Reflection;
-using Framework.Application;
 
 namespace ServiceHost;
 
@@ -16,7 +16,7 @@ public class SecurityPageFilter : IPageFilter
 
     public void OnPageHandlerSelected(PageHandlerSelectedContext context)
     {
-        
+
     }
 
     public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
@@ -25,11 +25,11 @@ public class SecurityPageFilter : IPageFilter
             .HandlerMethod?
             .MethodInfo.GetCustomAttribute(typeof(NeedsPermissionAttribute))!;
 
-        if(handlerPermission == null) return;
+        if (handlerPermission == null) return;
 
         var accountPermissions = _authHelper.GetPermissions();
 
-        if(accountPermissions.All(x => x != handlerPermission.Permissions))
+        if (accountPermissions.All(x => x != handlerPermission.Permissions))
             context?.HttpContext?.Response?.Redirect("/Account");
 
     }

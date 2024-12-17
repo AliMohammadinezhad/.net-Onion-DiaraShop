@@ -2,7 +2,6 @@
 using DiscountManagement.Domain.ColleagueDiscountAgg;
 using Framework.Application;
 using Framework.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using ShopManagement.Infrastructure.EfCore;
 
 namespace DiscountManagement.Infrastructure.EfCore.Repository;
@@ -30,7 +29,7 @@ public class ColleagueDiscountRepository : RepositoryBase<long, ColleagueDiscoun
 
     public List<ColleagueDiscountViewModel> Search(ColleagueDiscountSearchModel searchModel)
     {
-        var products = _applicationDbContext.Products.Select(x => new {x.Id, x.Name}).ToList();
+        var products = _applicationDbContext.Products.Select(x => new { x.Id, x.Name }).ToList();
         var query = _context.ColleagueDiscounts.Select(x => new ColleagueDiscountViewModel
         {
             DiscountRate = x.DiscountRate.ToString(),
@@ -47,7 +46,7 @@ public class ColleagueDiscountRepository : RepositoryBase<long, ColleagueDiscoun
         var discounts = query.OrderByDescending(x => x.Id).ToList();
         discounts.ForEach(discount =>
             discount.Product = products.FirstOrDefault(p => p.Id == discount.ProductId)?.Name);
-        
+
         return discounts;
     }
 }

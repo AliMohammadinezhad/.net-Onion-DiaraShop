@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-
-namespace CommentManagement.Infrastructure.EfCore;
+﻿namespace CommentManagement.Infrastructure.EfCore;
 
 public class CommentType
 {

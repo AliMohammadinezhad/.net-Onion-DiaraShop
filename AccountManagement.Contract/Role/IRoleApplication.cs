@@ -6,6 +6,6 @@ public interface IRoleApplication
 {
     OperationResult Create(CreateRole command);
     OperationResult Edit(EditRole command);
-    EditRole GetDetails(long  id);
+    EditRole GetDetails(long id);
     List<RoleViewModel> List();
 }

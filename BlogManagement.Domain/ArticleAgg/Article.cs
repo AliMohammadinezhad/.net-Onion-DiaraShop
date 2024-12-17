@@ -47,7 +47,7 @@ public class Article : EntityBase
         Title = title;
         ShortDescription = shortDescription;
         Description = description;
-        if(!string.IsNullOrWhiteSpace(picture))
+        if (!string.IsNullOrWhiteSpace(picture))
             Picture = picture;
         PictureAlt = pictureAlt;
         PictureTitle = pictureTitle;

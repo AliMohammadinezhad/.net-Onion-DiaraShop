@@ -1,36 +1,36 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Framework.Application;
+﻿using Framework.Application;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlogManagement.Application.Contract.ArticleCategory;
 
 public class CreateArticleCategory
 {
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public  string Name { get;  set; }
-    
-    public IFormFile Picture { get;  set; }
+    public string Name { get; set; }
+
+    public IFormFile Picture { get; set; }
 
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public  string PictureAlt { get; set; }
+    public string PictureAlt { get; set; }
 
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public  string PictureTitle { get; set; }
+    public string PictureTitle { get; set; }
 
-    [Required(ErrorMessage = ValidationMessages.IsRequired)]    
-    public  string Description { get;  set; }
-    
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public  int ShowOrder { get;  set; }
-    
+    public string Description { get; set; }
+
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public  string Slug { get;  set; }
-    
+    public int ShowOrder { get; set; }
+
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public  string Keywords { get;  set; }
-    
+    public string Slug { get; set; }
+
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public  string MetaDescription { get;  set; }
-    
-    public string? CanonicalAddress { get;  set; }
+    public string Keywords { get; set; }
+
+    [Required(ErrorMessage = ValidationMessages.IsRequired)]
+    public string MetaDescription { get; set; }
+
+    public string? CanonicalAddress { get; set; }
 }

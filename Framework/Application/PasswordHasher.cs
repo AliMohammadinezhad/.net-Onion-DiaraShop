@@ -1,5 +1,5 @@
-﻿using System.Security.Cryptography;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
+using System.Security.Cryptography;
 
 namespace Framework.Application
 {

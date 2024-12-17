@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using AccountManagement.Application.Contract.Account;
+﻿using AccountManagement.Application.Contract.Account;
 using AccountManagement.Domain.AccountAgg;
 using Framework.Application;
 using Framework.Infrastructure;
@@ -47,16 +46,16 @@ public class AccountRepository : RepositoryBase<long, Account>, IAccountReposito
         var query = _context.Accounts
             .Include(x => x.Role)
             .Select(x => new AccountViewModel()
-        {
-            Id = x.Id,
-            Username = x.Username,
-            FullName = x.FullName,
-            Mobile = x.Mobile,
-            ProfilePhoto = x.ProfilePhoto,
-            Role = x.Role.Name,
-            RoleId = x.RoleId,
-            CreationDate = x.CreationDate.ToFarsi()
-        });
+            {
+                Id = x.Id,
+                Username = x.Username,
+                FullName = x.FullName,
+                Mobile = x.Mobile,
+                ProfilePhoto = x.ProfilePhoto,
+                Role = x.Role.Name,
+                RoleId = x.RoleId,
+                CreationDate = x.CreationDate.ToFarsi()
+            });
 
         if (!string.IsNullOrWhiteSpace(searchModel.Username))
             query = query.Where(x => x.Username.Contains(searchModel.Username));
@@ -67,7 +66,7 @@ public class AccountRepository : RepositoryBase<long, Account>, IAccountReposito
         if (!string.IsNullOrWhiteSpace(searchModel.Mobile))
             query = query.Where(x => x.Mobile.Contains(searchModel.Mobile));
 
-        if (searchModel.RoleId > 0 )
+        if (searchModel.RoleId > 0)
             query = query.Where(x => x.RoleId.Equals(searchModel.RoleId));
 
         return query.OrderByDescending(x => x.Id).ToList();

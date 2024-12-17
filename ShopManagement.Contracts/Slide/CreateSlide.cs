@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Framework.Application;
+﻿using Framework.Application;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace ShopManagement.Contracts.Slide;
 
@@ -8,19 +8,19 @@ public class CreateSlide
 {
     [FileExtensionLimitation([".jpeg", ".jpg", ".png"], ErrorMessage = ValidationMessages.InvalidFileFormat)]
     [MaxFileSize(3 * 1024 * 1024, ErrorMessage = ValidationMessages.IsMaxFileSize)]
-    public IFormFile? Picture { get;  set; }
+    public IFormFile? Picture { get; set; }
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public string PictureAlt { get;  set; }
+    public string PictureAlt { get; set; }
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public string PictureTitle { get;  set; }
+    public string PictureTitle { get; set; }
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public string Heading { get;  set; }
+    public string Heading { get; set; }
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public string Title { get;  set; }
+    public string Title { get; set; }
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public string Text { get;  set; }
+    public string Text { get; set; }
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
-    public string BtnText { get;  set; }
+    public string BtnText { get; set; }
     [Required(ErrorMessage = ValidationMessages.IsRequired)]
     public string Link { get; set; }
 }

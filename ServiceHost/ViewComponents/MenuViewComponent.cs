@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Query;
-using Query.Contracts.ProductCategory;
 using Query.Contracts.ArticleCategory;
+using Query.Contracts.ProductCategory;
 
 namespace ServiceHost.ViewComponents;
 

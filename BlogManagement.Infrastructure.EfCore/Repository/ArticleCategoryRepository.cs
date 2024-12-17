@@ -50,15 +50,15 @@ public class ArticleCategoryRepository : RepositoryBase<long, ArticleCategory>, 
         var query = _blogContext.ArticleCategories
             .Include(x => x.Articles)
             .Select(x => new ArticleCategoryViewModel
-        {
-            Id = x.Id,
-            Picture = x.Picture,
-            Description = x.Description,
-            Name = x.Name,
-            ShowOrder = x.ShowOrder,
-            CreationDate = x.CreationDate.ToFarsi(),
-            ArticlesCount = x.Articles.Count
-        });
+            {
+                Id = x.Id,
+                Picture = x.Picture,
+                Description = x.Description,
+                Name = x.Name,
+                ShowOrder = x.ShowOrder,
+                CreationDate = x.CreationDate.ToFarsi(),
+                ArticlesCount = x.Articles.Count
+            });
 
         if (!string.IsNullOrWhiteSpace(searchModel.Name))
             query = query.Where(x => x.Name!.Contains(searchModel.Name));

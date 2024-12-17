@@ -1,7 +1,6 @@
 ﻿using DiscountManagement.Application.Contract.ColleagueDiscount;
 using DiscountManagement.Domain.ColleagueDiscountAgg;
 using Framework.Application;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DiscountManagement.Application;
 
@@ -18,7 +17,7 @@ public class ColleagueDiscountApplication : IColleagueDiscountApplication
     {
         var operation = new OperationResult();
         if (_colleagueDiscountRepository.Exists(x =>
-                x.ProductId == command.ProductId 
+                x.ProductId == command.ProductId
                 && x.DiscountRate == command.DiscountRate))
         {
             return operation.Failed(ApplicationMessages.DuplicatedRecord);
@@ -39,8 +38,8 @@ public class ColleagueDiscountApplication : IColleagueDiscountApplication
 
 
         if (_colleagueDiscountRepository.Exists(x =>
-                x.ProductId == command.ProductId 
-                && x.DiscountRate == command.DiscountRate 
+                x.ProductId == command.ProductId
+                && x.DiscountRate == command.DiscountRate
                 && x.Id != command.Id))
         {
             return operation.Failed(ApplicationMessages.DuplicatedRecord);

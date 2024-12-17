@@ -29,7 +29,7 @@ public class ProductCategoryApplication : IProductCategoryApplication
             command.PictureAlt, command.PictureTitle, command.Keyword, command.MetaDescription, slug);
 
         _repository.Create(productCategory);
-        _repository.SaveChanges(); 
+        _repository.SaveChanges();
         return operation.Succeeded();
     }
 

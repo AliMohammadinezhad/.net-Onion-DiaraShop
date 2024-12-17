@@ -9,5 +9,5 @@ public interface IProductPictureApplication
     OperationResult Remove(long id);
     OperationResult Restore(long id);
     EditProductPicture GetDetails(long id);
-    List<ProductPictureViewModel> Search(ProductPictureSearchModel  searchModel);
+    List<ProductPictureViewModel> Search(ProductPictureSearchModel searchModel);
 }

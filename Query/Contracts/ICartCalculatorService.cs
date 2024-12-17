@@ -1,5 +1,4 @@
 ﻿using ShopManagement.Contracts.Order;
-using ShopManagement.Infrastructure.EfCore;
 
 namespace Query.Contracts;
 

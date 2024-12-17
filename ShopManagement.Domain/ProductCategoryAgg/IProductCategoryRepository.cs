@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Framework.Domain;
+﻿using Framework.Domain;
 using ShopManagement.Contracts.ProductCategory;
 
 namespace ShopManagement.Domain.ProductCategoryAgg;

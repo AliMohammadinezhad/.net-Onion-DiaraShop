@@ -19,7 +19,7 @@ namespace InventoryManagement.Application
             var operation = new OperationResult();
             if (_repository.Exists(x => x.ProductId == command.ProductId))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
-            
+
             var inventory = new Inventory(command.ProductId, command.UnitPrice);
             _repository.Create(inventory);
             _repository.SaveChanges();
@@ -34,7 +34,7 @@ namespace InventoryManagement.Application
                 return operation.Failed(ApplicationMessages.RecordNotFound);
 
 
-            if(_repository.Exists(x => x.ProductId == command.ProductId && x.Id != command.Id))
+            if (_repository.Exists(x => x.ProductId == command.ProductId && x.Id != command.Id))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
             inventory.Edit(command.ProductId, command.UnitPrice);

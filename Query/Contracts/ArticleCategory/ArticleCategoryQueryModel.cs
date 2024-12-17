@@ -2,7 +2,7 @@
 
 namespace Query.Contracts.ArticleCategory;
 
-public class  ArticleCategoryQueryModel
+public class ArticleCategoryQueryModel
 {
     public long Id { get; set; }
     public string Name { get; set; }

@@ -40,7 +40,7 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Role
                         {
                             Group = group
                         };
-                        if(Command.MappedPermission.Any(x => x.Code == permission.Code))
+                        if (Command.MappedPermission.Any(x => x.Code == permission.Code))
                             item.Selected = true;
 
                         Permissions.Add(item);

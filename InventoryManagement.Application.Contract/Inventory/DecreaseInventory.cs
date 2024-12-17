@@ -14,7 +14,7 @@ public class DecreaseInventory
 
     public DecreaseInventory()
     {
-        
+
     }
 
     public DecreaseInventory(

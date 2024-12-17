@@ -3,7 +3,6 @@ using BlogManagement.Infrastructure.Configuration.Permissions;
 using Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ShopManagement.Contracts.ProductCategory;
 
 namespace ServiceHost.Areas.Administration.Pages.Blog.ArticleCategories
 {

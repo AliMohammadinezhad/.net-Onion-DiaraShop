@@ -20,7 +20,7 @@ public class Product : EntityBase
     public ProductCategory Category { get; private set; }
     public List<ProductPicture> ProductPictures { get; private set; }
 
-    public Product(string name, string code,string shortDescription, string description,
+    public Product(string name, string code, string shortDescription, string description,
         string picture, string pictureAlt, string pictureTitle, string slug, string keyword, string metaDescription,
         long categoryId)
     {

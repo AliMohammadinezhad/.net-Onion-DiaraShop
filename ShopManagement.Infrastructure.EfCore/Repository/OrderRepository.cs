@@ -1,14 +1,13 @@
 ﻿using AccountManagement.Infrastructure.EfCore;
 using Framework.Application;
 using Framework.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using ShopManagement.Contracts;
 using ShopManagement.Contracts.Order;
 using ShopManagement.Domain.OrderAgg;
 
 namespace ShopManagement.Infrastructure.EfCore.Repository;
 
-public class OrderRepository : RepositoryBase<long,Order>, IOrderRepository
+public class OrderRepository : RepositoryBase<long, Order>, IOrderRepository
 {
     private readonly ApplicationDbContext _context;
     private readonly AccountContext _accountContext;
@@ -24,7 +23,7 @@ public class OrderRepository : RepositoryBase<long,Order>, IOrderRepository
         var order = _context.Orders
             .Select(x => new { x.PayAmount, x.Id })
             .FirstOrDefault(x => x.Id == id);
-        if(order != null)
+        if (order != null)
             return order.PayAmount;
         return 0;
     }

@@ -1,10 +1,10 @@
-﻿using System.Linq.Expressions;
-using Framework.Domain;
+﻿using Framework.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Framework.Infrastructure;
 
-public class RepositoryBase<TKey, TModel> :  IRepository<TKey, TModel> where TModel : class
+public class RepositoryBase<TKey, TModel> : IRepository<TKey, TModel> where TModel : class
 {
     private readonly DbContext _context;
 

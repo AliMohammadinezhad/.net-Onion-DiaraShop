@@ -1,6 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Framework.Application;
 using System.ComponentModel.DataAnnotations;
-using Framework.Application;
 
 namespace AccountManagement.Application.Contract.Account;
 

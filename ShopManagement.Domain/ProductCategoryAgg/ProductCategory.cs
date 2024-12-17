@@ -38,7 +38,7 @@ public class ProductCategory : EntityBase
         PictureTitle = pictureTitle;
         Keyword = keyword;
         MetaDescription = metaDescription;
-        Slug = slug; 
+        Slug = slug;
     }
 
     public void Edit(

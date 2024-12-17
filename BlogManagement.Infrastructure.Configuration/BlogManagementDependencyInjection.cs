@@ -32,5 +32,5 @@ public class BlogManagementDependencyInjection
 
         services.AddDbContext<BlogContext>(x => x.UseSqlServer(connectionString));
     }
-    
+
 }

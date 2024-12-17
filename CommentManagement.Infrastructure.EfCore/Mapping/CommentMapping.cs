@@ -15,7 +15,7 @@ public class CommentMapping : IEntityTypeConfiguration<Comment>
         builder.Property(x => x.Email).HasMaxLength(500);
         builder.Property(x => x.Message).HasMaxLength(1000);
         builder.Property(x => x.Website).HasMaxLength(1000).IsRequired(false);
-        
+
         builder
             .HasOne(x => x.Parent)
             .WithMany(x => x.Children)

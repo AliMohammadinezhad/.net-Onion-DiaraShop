@@ -1,12 +1,9 @@
-﻿using BlogManagement.Domain.ArticleAgg;
-using BlogManagement.Infrastructure.EfCore;
+﻿using BlogManagement.Infrastructure.EfCore;
 using CommentManagement.Infrastructure.EfCore;
 using Framework.Application;
 using Microsoft.EntityFrameworkCore;
 using Query.Contracts.Article;
 using Query.Contracts.Comment;
-using Query.Contracts.Product;
-using ShopManagement.Domain.ProductAgg;
 
 namespace Query.Query;
 
@@ -47,7 +44,7 @@ public class ArticleQuery : IArticleQuery
             article.KewordList = article.Keywords.Split("،").ToList();
 
 
-        
+
 
 
         // Always populate the comments property

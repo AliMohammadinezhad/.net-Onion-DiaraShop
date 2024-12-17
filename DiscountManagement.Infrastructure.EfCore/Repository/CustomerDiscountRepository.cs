@@ -2,7 +2,6 @@
 using DiscountManagement.Domain.CustomerDiscountAgg;
 using Framework.Application;
 using Framework.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using ShopManagement.Infrastructure.EfCore;
 
 namespace DiscountManagement.Infrastructure.EfCore.Repository;
@@ -54,7 +53,7 @@ public class CustomerDiscountRepository : RepositoryBase<long, CustomerDiscount>
         if (!string.IsNullOrWhiteSpace(searchModel.StartDate))
 
             query = query.Where(x => x.StartDateGr > searchModel.StartDate.ToGeorgianDateTime());
-        
+
 
 
         if (!string.IsNullOrWhiteSpace(searchModel.EndDate))

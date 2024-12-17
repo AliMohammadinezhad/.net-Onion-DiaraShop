@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RestSharp;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Framework.Application.ZarinPal
 {
@@ -10,13 +9,13 @@ namespace Framework.Application.ZarinPal
         private readonly IConfiguration _configuration;
 
         public string Prefix { get; set; }
-        private string MerchantId { get;}
+        private string MerchantId { get; }
 
         public ZarinPalFactory(IConfiguration configuration)
         {
             _configuration = configuration;
             Prefix = _configuration.GetSection("payment")["method"];
-            MerchantId= _configuration.GetSection("payment")["merchant"];
+            MerchantId = _configuration.GetSection("payment")["merchant"];
         }
 
         public PaymentResponse CreatePaymentRequest(
@@ -93,7 +92,7 @@ namespace Framework.Application.ZarinPal
             var jsonBody = JsonConvert.SerializeObject(body);
             request.AddJsonBody(jsonBody);
             var response = client.Execute(request);
-            
+
             return JsonConvert.DeserializeObject<VerificationResponse>(response.Content);
         }
     }

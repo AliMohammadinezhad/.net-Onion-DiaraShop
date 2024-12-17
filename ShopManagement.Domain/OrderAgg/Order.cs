@@ -15,7 +15,7 @@ public class Order : EntityBase
     public long RefId { get; private set; }
     public List<OrderItem> Items { get; private set; }
 
-    public Order(long accountId,int paymentMethod, double totalPrice, double discountAmount, double payAmount)
+    public Order(long accountId, int paymentMethod, double totalPrice, double discountAmount, double payAmount)
     {
         AccountId = accountId;
         PaymentMethod = paymentMethod;
@@ -31,8 +31,8 @@ public class Order : EntityBase
     public void PaymentSucceeded(long refId)
     {
         IsPaid = true;
-        
-        if(refId !=  0)
+
+        if (refId != 0)
             RefId = refId;
 
     }

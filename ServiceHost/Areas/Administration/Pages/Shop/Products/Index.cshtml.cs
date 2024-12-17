@@ -1,9 +1,7 @@
-using Framework.Application;
 using Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ShopManagement.Contracts.Product;
 using ShopManagement.Contracts.ProductCategory;
 using ShopManagement.infrastructure.Configuration.Permissions;
@@ -40,7 +38,7 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
             };
             return Partial("./Create", command);
         }
-        
+
         [NeedsPermission(ShopPermissions.CreateProduct)]
         public IActionResult OnPostCreate(CreateProduct command)
         {
@@ -63,6 +61,6 @@ namespace ServiceHost.Areas.Administration.Pages.Shop.Products
             return new JsonResult(result);
         }
 
-        
+
     }
 }

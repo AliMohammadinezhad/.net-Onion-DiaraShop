@@ -1,8 +1,6 @@
 using DiscountManagement.Application.Contract.ColleagueDiscount;
-using DiscountManagement.Application.Contract.CustomerDiscount;
 using DiscountManagement.infrastructure.Configuration.Permissions;
 using Framework.Infrastructure;
-using InventoryManagement.Infrastructure.Configuration.Permissions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;

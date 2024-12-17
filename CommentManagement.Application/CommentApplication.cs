@@ -17,7 +17,7 @@ public class CommentApplication : ICommentApplication
     {
         var operation = new OperationResult();
         var comment = new Comment(command.Name, command.Email, command.Message, command.OwnerRecordId, command.Type, command.Website, command.ParentId);
-        
+
         _commentRepository.Create(comment);
         _commentRepository.SaveChanges();
         return operation.Succeeded();

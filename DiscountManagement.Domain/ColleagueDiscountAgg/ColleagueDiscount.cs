@@ -32,5 +32,5 @@ public class ColleagueDiscount : EntityBase
         IsRemoved = false;
     }
 
-    
+
 }

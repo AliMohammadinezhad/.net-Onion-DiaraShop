@@ -105,13 +105,13 @@ public class ProductQuery : IProductQuery
     private static List<ProductPictureQueryModel> MapProductPictures(List<ProductPicture> pictures)
     {
         return pictures.Select(x => new ProductPictureQueryModel
-            {
-                IsRemoved = x.IsRemoved,
-                Picture = x.Picture,
-                PictureAlt = x.PictureAlt,
-                PictureTitle = x.PictureTitle,
-                ProductId = x.ProductId
-            })
+        {
+            IsRemoved = x.IsRemoved,
+            Picture = x.Picture,
+            PictureAlt = x.PictureAlt,
+            PictureTitle = x.PictureTitle,
+            ProductId = x.ProductId
+        })
             .Where(x => !x.IsRemoved)
             .ToList();
     }
@@ -143,12 +143,12 @@ public class ProductQuery : IProductQuery
         foreach (var product in products)
         {
             var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
-            
+
             if (productInventory == null) continue;
             var price = productInventory.UnitPrice;
             product.Price = price.ToMoney();
             var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
-            
+
             if (discount == null) continue;
             var discountRate = discount.DiscountRate;
             product.DiscountRate = discountRate;

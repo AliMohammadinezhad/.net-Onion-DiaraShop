@@ -1,7 +1,6 @@
 ﻿using Framework.Application;
 using ShopManagement.Contracts.ProductPicture;
 using ShopManagement.Domain.ProductAgg;
-using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
 
 namespace ShopManagement.Application;

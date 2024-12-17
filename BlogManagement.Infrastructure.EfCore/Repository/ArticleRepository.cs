@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using BlogManagement.Application.Contract.Article;
+﻿using BlogManagement.Application.Contract.Article;
 using BlogManagement.Domain.ArticleAgg;
 using Framework.Application;
 using Framework.Infrastructure;

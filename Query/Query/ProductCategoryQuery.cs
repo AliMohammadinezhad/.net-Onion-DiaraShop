@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using DiscountManagement.Infrastructure.EfCore;
+﻿using DiscountManagement.Infrastructure.EfCore;
 using Framework.Application;
 using InventoryManagement.Infrastructure.EfCore;
 using Microsoft.EntityFrameworkCore;
@@ -50,21 +49,21 @@ public class ProductCategoryQuery : IProductCategoryQuery
 
         foreach (var product in category?.Products)
         {
-                var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
+            var productInventory = inventory.FirstOrDefault(x => x.ProductId == product.Id);
 
-                if (productInventory == null) continue;
-                var price = productInventory.UnitPrice;
-                product.Price = price.ToMoney();
-                var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
+            if (productInventory == null) continue;
+            var price = productInventory.UnitPrice;
+            product.Price = price.ToMoney();
+            var discount = discounts.FirstOrDefault(x => x.ProductId == product.Id);
 
-                if (discount == null) continue;
-                var discountRate = discount.DiscountRate;
-                product.DiscountRate = discountRate;
-                product.DiscountExpireDate = discount.EndDate.ToDiscountFormat();
-                product.HasDiscount = discountRate > 0;
+            if (discount == null) continue;
+            var discountRate = discount.DiscountRate;
+            product.DiscountRate = discountRate;
+            product.DiscountExpireDate = discount.EndDate.ToDiscountFormat();
+            product.HasDiscount = discountRate > 0;
 
-                var discountAmount = Math.Round(discountRate * price / 100);
-                product.PriceWithDiscount = (price - discountAmount).ToMoney();
+            var discountAmount = Math.Round(discountRate * price / 100);
+            product.PriceWithDiscount = (price - discountAmount).ToMoney();
 
 
         }
@@ -133,16 +132,16 @@ public class ProductCategoryQuery : IProductCategoryQuery
     private static List<ProductQueryModel> MapProducts(List<Product> products)
     {
         return products.Select(product => new ProductQueryModel()
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Picture = product.Picture,
-                PictureAlt = product.PictureAlt,
-                PictureTitle = product.PictureTitle,
-                Category = product.Category.Name,
-                CategorySlug = product.Category.Slug,
-                Slug = product.Slug
-            })
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Picture = product.Picture,
+            PictureAlt = product.PictureAlt,
+            PictureTitle = product.PictureTitle,
+            Category = product.Category.Name,
+            CategorySlug = product.Category.Slug,
+            Slug = product.Slug
+        })
             .ToList();
     }
 }

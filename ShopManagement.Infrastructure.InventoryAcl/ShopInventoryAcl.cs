@@ -4,7 +4,7 @@ using ShopManagement.Domain.Services;
 
 namespace ShopManagement.Infrastructure.InventoryAcl
 {
-    public class ShopInventoryAcl: IShopInventoryAcl
+    public class ShopInventoryAcl : IShopInventoryAcl
     {
         private readonly IInventoryApplication _inventoryApplication;
 

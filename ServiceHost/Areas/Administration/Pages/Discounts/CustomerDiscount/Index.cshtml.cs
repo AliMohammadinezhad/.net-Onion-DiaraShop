@@ -1,13 +1,10 @@
 using DiscountManagement.Application.Contract.CustomerDiscount;
 using DiscountManagement.infrastructure.Configuration.Permissions;
-using Framework.Application;
 using Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopManagement.Contracts.Product;
-using ShopManagement.Contracts.ProductCategory;
-using ShopManagement.Domain.ProductAgg;
 
 namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscount
 {
@@ -33,7 +30,7 @@ namespace ServiceHost.Areas.Administration.Pages.Discounts.CustomerDiscount
         }
 
         [NeedsPermission(DiscountPermissions.CreateCustomerDiscount)]
-        public IActionResult OnGetCreate()        
+        public IActionResult OnGetCreate()
         {
             var command = new DefineCustomerDiscount
             {

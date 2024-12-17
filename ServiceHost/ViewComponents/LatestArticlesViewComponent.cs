@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Query.Contracts.Article;
-using Query.Contracts.Product;
 
 namespace ServiceHost.ViewComponents;
 

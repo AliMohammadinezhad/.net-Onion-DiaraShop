@@ -1,9 +1,9 @@
-﻿using System.Security.Claims;
-using Framework.Infrastructure;
+﻿using Framework.Infrastructure;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace Framework.Application;
 

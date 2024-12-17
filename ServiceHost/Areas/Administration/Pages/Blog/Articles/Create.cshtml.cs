@@ -1,7 +1,6 @@
 using BlogManagement.Application.Contract.Article;
 using BlogManagement.Application.Contract.ArticleCategory;
 using BlogManagement.Infrastructure.Configuration.Permissions;
-using DiscountManagement.infrastructure.Configuration.Permissions;
 using Framework.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

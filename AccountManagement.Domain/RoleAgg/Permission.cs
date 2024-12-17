@@ -1,6 +1,4 @@
-﻿using Framework.Domain;
-
-namespace AccountManagement.Domain.RoleAgg;
+﻿namespace AccountManagement.Domain.RoleAgg;
 
 public class Permission
 {

@@ -30,12 +30,12 @@ public class ArticleApplication : IArticleApplication
         var categorySlug = _articleCategoryRepository.GetSlugBy(command.CategoryId);
 
         var path = $"{categorySlug}/{slug}";
-        var pictureFile = _fileUploader.Upload(command.Picture, path); 
-        
+        var pictureFile = _fileUploader.Upload(command.Picture, path);
+
         var article = new Article(command.Title, command.ShortDescription, command.Description, pictureFile, command.PictureAlt,
             command.PictureTitle, slug, command.Keywords, command.MetaDescription, command.CanonicalAddress, command.CategoryId,
             publishDate);
-        
+
         _articleRepository.Create(article);
         _articleRepository.SaveChanges();
         return operation.Succeeded();

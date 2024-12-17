@@ -8,5 +8,5 @@ public interface IArticleCategoryApplication
     OperationResult Edit(EditArticleCategory command);
     EditArticleCategory GetDetails(long id);
     List<ArticleCategoryViewModel> GetArticleCategories();
-    List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel  searchModel);
+    List<ArticleCategoryViewModel> Search(ArticleCategorySearchModel searchModel);
 }

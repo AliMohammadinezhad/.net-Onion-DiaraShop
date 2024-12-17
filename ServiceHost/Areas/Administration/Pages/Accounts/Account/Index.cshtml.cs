@@ -64,7 +64,7 @@ namespace ServiceHost.Areas.Administration.Pages.Accounts.Account
         [NeedsPermission(AccountPermissions.ChangePasswordAccounts)]
         public IActionResult OnGetChangePassword(long id)
         {
-            var account = new ChangePassword(){Id = id};
+            var account = new ChangePassword() { Id = id };
 
             return Partial("./ChangePassword", account);
         }

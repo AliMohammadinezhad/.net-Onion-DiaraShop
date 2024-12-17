@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Framework.Application;
+﻿using Framework.Application;
 using Framework.Application.ZarinPal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -85,7 +84,7 @@ namespace ServiceHost.Pages
             else
             {
                 var paymentResult = new PaymentResult();
-                return RedirectToPage("/PaymentResult", paymentResult.Succeeded("سفارش شما با موفقیت ثبت شد. پس از تماس کارشناسان ما و پرداخت وجه، سفارش شما ارسال خواهد شد.",null));
+                return RedirectToPage("/PaymentResult", paymentResult.Succeeded("سفارش شما با موفقیت ثبت شد. پس از تماس کارشناسان ما و پرداخت وجه، سفارش شما ارسال خواهد شد.", null));
             }
         }
 
@@ -102,12 +101,12 @@ namespace ServiceHost.Pages
             switch (status)
             {
                 case "OK" when verificationResponse.Data.Status == 100:
-                {
-                    var issueTrackingNumber = _orderApplication.PaymentSucceeded(oId, verificationResponse.Data.RefID);
-                    Response.Cookies.Delete(CookieName);
-                    result = result.Succeeded("پرداخت با موفقیت انجام شد.", issueTrackingNumber);
-                    return RedirectToPage("./PaymentResult", result);
-                }
+                    {
+                        var issueTrackingNumber = _orderApplication.PaymentSucceeded(oId, verificationResponse.Data.RefID);
+                        Response.Cookies.Delete(CookieName);
+                        result = result.Succeeded("پرداخت با موفقیت انجام شد.", issueTrackingNumber);
+                        return RedirectToPage("./PaymentResult", result);
+                    }
                 case "OK" when verificationResponse.Data.Status == 101:
                     result = result.Failed("پرداخت با موفقیت انجام شد اما شما دوباره سعی به پرداخت کردید!");
                     return RedirectToPage("./PaymentResult", result);

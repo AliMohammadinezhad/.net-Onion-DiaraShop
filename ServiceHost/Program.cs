@@ -1,5 +1,3 @@
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
 using AccountManagement.Infrastructure.Configuration;
 using BlogManagement.Infrastructure.Configuration;
 using CommentManagement.Infrastructure.Configuration;
@@ -9,10 +7,12 @@ using Framework.Application.ZarinPal;
 using Framework.Infrastructure;
 using InventoryManagement.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Query.Contracts;
-using Query.Query;
 using ServiceHost;
 using ShopManagement.infrastructure.Configuration;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
+using InventoryManagement.Presentation.Api;
+using ShopManagement.Presentation.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,7 +60,7 @@ builder.Services.AddAuthorization(options =>
         options.AddPolicy("Shop", policy => policy.RequireRole([Roles.Admin]));
         options.AddPolicy("Discount", policy => policy.RequireRole([Roles.Admin]));
         options.AddPolicy("Account", policy => policy.RequireRole([Roles.Admin]));
-}
+    }
 );
 
 builder.Services.AddRazorPages()
@@ -71,8 +71,9 @@ builder.Services.AddRazorPages()
         options.Conventions.AuthorizeAreaFolder("Administration", "/Shop", "Shop");
         options.Conventions.AuthorizeAreaFolder("Administration", "/Discounts", "Discount");
         options.Conventions.AuthorizeAreaFolder("Administration", "/Accounts", "Account");
-    }
-        );
+    })
+    .AddApplicationPart(typeof(ProductController).Assembly)
+    .AddApplicationPart(typeof(InventoryController).Assembly);
 
 
 var app = builder.Build();
@@ -95,5 +96,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllers();
 
 app.Run();

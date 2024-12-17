@@ -30,12 +30,15 @@ public class ArticleRepository : RepositoryBase<long, Article>, IArticleReposito
             ShortDescription = x.ShortDescription,
             PublishDate = x.PublishDate.ToFarsi(),
             Title = x.Title
-        }).FirstOrDefault(x => x.Id == id);
+        }).FirstOrDefault(x => x.Id == id) ?? throw new NullReferenceException($"There is no any Article with id {id}");
     }
 
     public Article GetWithCategory(long id)
     {
-        return blogContext.Articles.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
+        return blogContext
+            .Articles
+            .Include(x => x.Category)
+            .FirstOrDefault(x => x.Id == id) ?? throw new NullReferenceException($"There is no any Article with id {id}");
     }
 
     public List<ArticleViewModel> Search(ArticleSearchModel searchModel)

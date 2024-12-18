@@ -65,6 +65,16 @@ public class OrderApplication : IOrderApplication
         _orderRepository.SaveChanges();
     }
 
+    public List<OrderViewModel> GetTotalPlacedOrders()
+    {
+        return _orderRepository.GetTotalPlacedOrders();
+    }
+
+    public List<OrderViewModel> GetTotalOrders()
+    {
+        return _orderRepository.GetTotalOrders();
+    }
+
     public List<OrderItemViewModel> GetItems(long orderId)
     {
         return _orderRepository.GetItems(orderId);

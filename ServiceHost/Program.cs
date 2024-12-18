@@ -11,6 +11,7 @@ using ServiceHost;
 using ShopManagement.infrastructure.Configuration;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using AccountManagement.Infrastructure.EfCore.Middleware;
 using InventoryManagement.Presentation.Api;
 using ShopManagement.Presentation.Api;
 
@@ -94,6 +95,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseMiddleware<VisitorTrackingMiddleware>();
 app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -1,5 +1,6 @@
 ﻿using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
+using AccountManagement.Domain.VisitorAgg;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountManagement.Infrastructure.EfCore
@@ -8,6 +9,7 @@ namespace AccountManagement.Infrastructure.EfCore
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Visitor> Visitors { get; set; }
         public AccountContext(DbContextOptions<AccountContext> options) : base(options)
         {
         }

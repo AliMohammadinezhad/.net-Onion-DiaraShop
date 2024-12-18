@@ -15,4 +15,5 @@ public class OrderViewModel
     public string IssueTrackingNumber { get; set; }
     public long RefId { get; set; }
     public string CreationDate { get; set; }
+    public DateTime CreationDateCalculations { get; set; }
 }

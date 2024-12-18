@@ -28,6 +28,33 @@ public class OrderRepository : RepositoryBase<long, Order>, IOrderRepository
         return 0;
     }
 
+    public List<OrderViewModel> GetTotalPlacedOrders()
+    {
+        return _context.Orders
+            .Where(x => x.IsCancelled == false)
+            .Where(x => x.IsPaid == true)
+            .Select(x => new OrderViewModel
+        {
+            Id = x.Id,
+            IsCancelled = x.IsCancelled,
+            IsPaid = x.IsPaid,
+            PayAmount = x.PayAmount,
+        }).ToList();
+    }
+
+    public List<OrderViewModel> GetTotalOrders()
+    {
+        return _context.Orders
+            .Select(x => new OrderViewModel
+            {
+                Id = x.Id,
+                IsCancelled = x.IsCancelled,
+                IsPaid = x.IsPaid,
+                PayAmount = x.PayAmount,
+                CreationDateCalculations = x.CreationDate
+            }).ToList();
+    }
+
     public List<OrderItemViewModel> GetItems(long orderId)
     {
         var products = _context.Products.Select(x => new { x.Id, x.Name }).ToList();

@@ -21,6 +21,7 @@
 	  <ProjectReference Include="..\AccountManagement.Domain\AccountManagement.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Middleware\" />
 	  <Folder Include="Repository\" />
 	</ItemGroup>
 </Project>

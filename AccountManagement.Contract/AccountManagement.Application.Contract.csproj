@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Visitor\" />
     <Folder Include="Role\" />
+    <Folder Include="VisitorService\" />
   </ItemGroup>
 
 </Project>

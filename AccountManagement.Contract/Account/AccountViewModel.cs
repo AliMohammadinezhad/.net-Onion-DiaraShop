@@ -10,4 +10,5 @@ public class AccountViewModel
     public long RoleId { get; init; }
     public string ProfilePhoto { get; init; }
     public string CreationDate { get; init; }
+    public DateTime CreationDateCalculation { get; set; }
 }

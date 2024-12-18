@@ -1,8 +1,11 @@
 ﻿using AccountManagement.Application;
 using AccountManagement.Application.Contract.Account;
 using AccountManagement.Application.Contract.Role;
+using AccountManagement.Application.Contract.Visitor;
+using AccountManagement.Application.Contract.VisitorService;
 using AccountManagement.Domain.AccountAgg;
 using AccountManagement.Domain.RoleAgg;
+using AccountManagement.Domain.VisitorAgg;
 using AccountManagement.Infrastructure.Configuration.Permissions;
 using AccountManagement.Infrastructure.EfCore;
 using AccountManagement.Infrastructure.EfCore.Repository;
@@ -21,6 +24,10 @@ namespace AccountManagement.Infrastructure.Configuration
 
             services.AddTransient<IRoleApplication, RoleApplication>();
             services.AddTransient<IRoleRepository, RoleRepository>();
+
+            services.AddTransient<IVisitorRepository, VisitorRepository>();
+            services.AddTransient<IVisitorApplication, VisitorApplication>();
+            services.AddTransient<IVisitorService, VisitorService>();
 
             services.AddTransient<IPermissionExposer, AccountPermissionExposer>();
 

@@ -216,11 +216,7 @@ function checkCartValidation() {
         return false;
     }
 
-    const invalidProducts = products.filter(product => {
-        if (!product.count || product.count.trim() === "" || parseInt(product.count) <= 0) {
-            return true;
-        }
-        return false;
+    const invalidProducts = products.filter(product => (!product.count || product.count.trim() === "" || parseInt(product.count) <= 0)
     });
 
     if (invalidProducts.length > 0) {

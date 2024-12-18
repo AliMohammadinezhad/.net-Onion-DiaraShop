@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Nancy.Json;
+using Newtonsoft.Json;
 using Query.Contracts.Product;
 using ShopManagement.Contracts.Order;
 
@@ -21,10 +22,9 @@ namespace ServiceHost.Pages
         }
         public void OnGet()
         {
-            var serializer = new JavaScriptSerializer();
             var value = Request.Cookies[CookieName];
             if (value == null) return;
-            var cartItems = serializer.Deserialize<List<CartItem>>(value);
+            var cartItems = JsonConvert.DeserializeObject<List<CartItem>>(value) ?? [];
             foreach (var item in cartItems)
                 item.TotalItemPrice = item.Count * item.UnitPrice;
 
@@ -33,10 +33,10 @@ namespace ServiceHost.Pages
 
         public IActionResult OnGetRemoveFromCart(long cartItemId)
         {
-            var serializer = new JavaScriptSerializer();
             var value = Request.Cookies[CookieName];
             Response.Cookies.Delete(CookieName);
-            List<CartItem> cartItems = serializer.Deserialize<List<CartItem>>(value);
+            if (value == null) return RedirectToPage("/Index");
+            List<CartItem> cartItems = JsonConvert.DeserializeObject<List<CartItem>>(value) ?? [];
             CartItem itemToRemove = cartItems.FirstOrDefault(x => x.Id == cartItemId) ?? throw new NullReferenceException();
             cartItems.Remove(itemToRemove);
             var options = new CookieOptions
@@ -45,17 +45,18 @@ namespace ServiceHost.Pages
                 IsEssential = true,
                 Domain = "localhost",
             };
-            var updatedCartItem = serializer.Serialize(cartItems);
+            var updatedCartItem = JsonConvert.SerializeObject(cartItems);
             Response.Cookies.Append(CookieName, updatedCartItem, options);
             return RedirectToPage("/Cart");
         }
 
         public IActionResult OnGetGoToCheckOut()
         {
-            var serializer = new JavaScriptSerializer();
             var value = Request.Cookies[CookieName];
-            if (value == null) return RedirectToPage("/Cart");
-            var cartItems = serializer.Deserialize<List<CartItem>>(value);
+            if (value == null) 
+                return RedirectToPage("/index");
+            var cartItems = JsonConvert.DeserializeObject<List<CartItem>>(value) ?? [];
+            if (cartItems == null) return RedirectToPage("/index");
             foreach (var item in cartItems)
             {
                 item.TotalItemPrice = item.Count * item.UnitPrice;

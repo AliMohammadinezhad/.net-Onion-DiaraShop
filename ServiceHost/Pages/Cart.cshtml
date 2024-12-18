@@ -93,18 +93,15 @@
                                     </tbody>
                                 </table>
                             </div>
-                            @if(Model.CartItems.TrueForAll(x => x.IsInStock == true))
-                            {
-                                <div class="row">
-                                    <div class="col-lg-6 col-12 d-flex">
-                                        <div class="cart-summary">
-                                            <div class="cart-summary-button">
-                                                <a class="checkout-btn" asp-page-handler="GoToCheckOut">تکمیل فرایند خرید</a>
-                                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-12 d-flex">
+                                    <div class="cart-summary">
+                                        <div class="cart-summary-button">
+                                            <a class="checkout-btn" id="goToCheckoutButton" asp-page-handler="GoToCheckOut" onclick="checkCartValidation()">تکمیل فرایند خرید</a>
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            </div>
                         }
                         else
                         {
@@ -118,3 +115,18 @@
         </div>
     </div>
 </div>
+
+
+@section Js
+{
+    <script>
+        $("#goToCheckoutButton").on("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (!checkCartValidation()) {
+                return;
+            }
+        });
+    </script>
+
+}

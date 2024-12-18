@@ -14,6 +14,7 @@
     <ProjectReference Include="..\InventoryManagement.Application\InventoryManagement.Application.csproj" />
     <ProjectReference Include="..\InventoryManagement.Infrastructure.EfCore\InventoryManagement.Infrastructure.EfCore.csproj" />
     <ProjectReference Include="..\InventoryManagement\InventoryManagement.Domain\InventoryManagement.Domain.csproj" />
+    <ProjectReference Include="..\Query\Query.csproj" />
   </ItemGroup>
 
 </Project>

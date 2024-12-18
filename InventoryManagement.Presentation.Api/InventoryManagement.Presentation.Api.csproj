@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InventoryManagement.Application.Contract\InventoryManagement.Application.Contract.csproj" />
+    <ProjectReference Include="..\Query\Query.csproj" />
   </ItemGroup>
 
 </Project>

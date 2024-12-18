@@ -1,4 +1,5 @@
 ﻿using Framework.Application;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryManagement.Application.Contract.Inventory;
 

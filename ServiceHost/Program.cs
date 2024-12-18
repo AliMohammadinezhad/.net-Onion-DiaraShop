@@ -73,7 +73,15 @@ builder.Services.AddRazorPages()
         options.Conventions.AuthorizeAreaFolder("Administration", "/Accounts", "Account");
     })
     .AddApplicationPart(typeof(ProductController).Assembly)
-    .AddApplicationPart(typeof(InventoryController).Assembly);
+    .AddApplicationPart(typeof(InventoryController).Assembly)
+    .AddNewtonsoftJson();
+
+builder.Services.AddCors(options => options.AddPolicy("MyPolicy", policyBuilder =>
+{
+    policyBuilder.WithOrigins("http://localhost:5005");
+    policyBuilder.AllowAnyHeader();
+    policyBuilder.AllowAnyMethod();
+}));
 
 
 var app = builder.Build();
@@ -87,15 +95,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseAuthentication();
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCookiePolicy();
 app.UseRouting();
-
 app.UseAuthorization();
-
+app.UseCors();
 app.MapRazorPages();
 app.MapControllers();
-
 app.Run();

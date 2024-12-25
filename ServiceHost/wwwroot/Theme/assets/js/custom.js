@@ -200,7 +200,6 @@ function changeCartItemCount(id, totalId, count) {
 
 
 function checkCartValidation() {
-    console.log("call checking")
     let products = $.cookie(cookieName);
 
     if (!products) {
@@ -216,8 +215,7 @@ function checkCartValidation() {
         return false;
     }
 
-    const invalidProducts = products.filter(product => (!product.count || product.count.trim() === "" || parseInt(product.count) <= 0)
-    });
+    const invalidProducts = products.filter(product => (!product.count || product.count === "" || parseInt(product.count) <= 0))
 
     if (invalidProducts.length > 0) {
         alert("تعداد برخی کالاها در سبد خرید معتبر نیست. لطفاً مقادیر را بررسی کنید.");

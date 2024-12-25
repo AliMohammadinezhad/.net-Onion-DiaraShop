@@ -49,7 +49,7 @@ public class OrderApplication : IOrderApplication
         var symbol = _configuration.GetSection("Symbol").Value;
         var issueTrackingNumber = CodeGenerator.Generate(symbol);
         order.SetIssueTrackingNumber(issueTrackingNumber);
-        if (_shopInventoryAcl.DecreaseFromInventory(order.Items)) return "";
+        if (!_shopInventoryAcl.DecreaseFromInventory(order.Items)) return "";
 
         _orderRepository.SaveChanges();
         var account = _shopAccountAcl.GetAccountById(order.AccountId);

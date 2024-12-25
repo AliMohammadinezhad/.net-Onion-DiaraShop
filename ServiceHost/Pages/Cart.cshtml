@@ -121,9 +121,8 @@
 {
     <script>
         $("#goToCheckoutButton").on("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
             if (!checkCartValidation()) {
+                event.preventDefault();
                 return;
             }
         });

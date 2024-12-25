@@ -19,6 +19,7 @@ using ShopManagement.Domain.ProductCategoryAgg;
 using ShopManagement.Domain.ProductPictureAgg;
 using ShopManagement.Domain.Services;
 using ShopManagement.Domain.SlideAgg;
+using ShopManagement.Infrastructure.AccountAcl;
 using ShopManagement.infrastructure.Configuration.Permissions;
 using ShopManagement.Infrastructure.EfCore;
 using ShopManagement.Infrastructure.EfCore.Repository;
@@ -52,6 +53,7 @@ public class ShopManagementDependencyInjection
         services.AddTransient<ICartCalculatorService, CartCalculatorService>();
         
         services.AddTransient<IShopInventoryAcl, ShopInventoryAcl>();
+        services.AddTransient<IShopAccountAcl, ShopAccountAcl>();
 
         services.AddSingleton<ICartService, CartService>();
 

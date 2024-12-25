@@ -32,7 +32,8 @@ public class AuthHelper : IAuthHelper
             new(ClaimTypes.Name, account.FullName),
             new(ClaimTypes.Role, account.RoleId.ToString()),
             new("Username", account.Username),
-            new("Permissions", permissions)
+            new("Permissions", permissions),
+            new("Mobile", account.Mobile),
         };
 
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -67,6 +68,7 @@ public class AuthHelper : IAuthHelper
         result.Username = claims.FirstOrDefault(x => x.Type == "Username")?.Value!;
         result.FullName = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value!;
         result.Role = Roles.GetRoleBy(result.RoleId);
+        result.Mobile = claims.FirstOrDefault(x => x.Type == "Mobile")?.Value!;
         return result;
     }
 
@@ -89,6 +91,13 @@ public class AuthHelper : IAuthHelper
         return IsAuthenticated()
             ? long.Parse(_contextAccessor.HttpContext.User.Claims.First(x => x.Type == "AccountId")?.Value)
             : 0;
+    }
+
+    public string CurrentAccountMobile()
+    {
+        return IsAuthenticated()
+            ? _contextAccessor.HttpContext.User.Claims.First(x => x.Type == "Movile")?.Value
+            : "";
     }
 
     public void SignOut()

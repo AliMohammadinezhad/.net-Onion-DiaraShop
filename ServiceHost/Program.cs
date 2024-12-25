@@ -12,6 +12,8 @@ using ShopManagement.infrastructure.Configuration;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using AccountManagement.Infrastructure.EfCore.Middleware;
+using Framework.Application.Email;
+using Framework.Application.Sms;
 using InventoryManagement.Presentation.Api;
 using ShopManagement.Presentation.Api;
 
@@ -37,7 +39,10 @@ builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, Unico
 builder.Services.AddTransient<IAuthHelper, AuthHelper>();
 builder.Services.AddTransient<IFileUploader, FileUploader>();
 builder.Services.AddTransient<IZarinPalFactory, ZarinPalFactory>();
+builder.Services.AddTransient<ISmsService, SmsService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
+
 builder.Services.AddRazorPages();
 
 
